@@ -19,7 +19,7 @@ class MovieListSerializer(serializers.ModelSerializer):
     class GenreListSerializer(serializers.ModelSerializer):
         class Meta:
             model = Genre
-            fields = ('name',)
+            fields = ('genre_id', 'genre_name',)
 
     genre_ids = GenreListSerializer(many=True, read_only=True)
 
@@ -33,7 +33,7 @@ class MovieListSerializer(serializers.ModelSerializer):
 
 
 class MovieSerializer(serializers.ModelSerializer):
-
+    # 영화에 작성된 리뷰 가져오기
     class ReviewSerializer(serializers.ModelSerializer):
         user = UserSerializer(read_only=True)
 

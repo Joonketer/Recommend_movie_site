@@ -24,8 +24,8 @@ class Movie(models.Model):
     poster_path = models.CharField(max_length=200)  # 사진
     backdrop_path = models.CharField(max_length=200, null=True)
     genre_ids = models.ManyToManyField(Genre)   # 장르
-    like_users = models.ManyToManyField(    # 좋아요한 사람
-        settings.AUTH_USER_MODEL, related_name='like_movies', blank=True)
+    like_users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name='like_movies', blank=True)   # 좋아요한 사람
 
     def __str__(self):
         return self.title
