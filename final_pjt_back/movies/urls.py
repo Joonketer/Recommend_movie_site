@@ -25,7 +25,7 @@ urlpatterns = [
     path('movies/<int:movie_pk>/review/', views.review_create),  # 영화 리뷰 작성
     path('movies/<int:movie_pk>/like/', views.movie_like),  # 영화 좋아요
     path('reviews/', views.review_list),    # 전체 리뷰
-    path('reviews/<int:review_pk>/', views.review_detail),  # 내가 쓴 리뷰
+    path('reviews/<int:review_pk>/', views.review_detail),  # 상세 리뷰
     path('reviews/<int:review_pk>/like/', views.review_like),  # 영화 좋아요
 
 

@@ -24,17 +24,10 @@ def movie_list(request):
         serializer = MovieListSerializer(movies, many=True)
         return Response(serializer.data)
 
-    # elif request.method == 'POST':
-    #     serializer = MovieSerializer(data=request.data)
-    #     if serializer.is_valid(raise_exception=True):
-    #         serializer.save()
-    #         # serializer.save(user=request.user)
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
 # 영화 상세
 
 
-@api_view(['PUT'])
+@api_view(['GET'])
 def movie_detail(request, movie_pk):
     # movie = Movie.objects.get(pk=movie_pk)
     movie = get_object_or_404(Movie, pk=movie_pk)
@@ -61,15 +54,15 @@ def review_list(request):
 def review_detail(request, review_pk):
     # review = Review.objects.get(pk=review_pk)
     review = get_object_or_404(Review, pk=review_pk)
-
+    # 상세 리뷰 보기
     if request.method == 'GET':
         serializer = ReviewSerializer(review)
         return Response(serializer.data)
-
+    # 삭제
     elif request.method == 'DELETE':
         review.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
+    # 리뷰 수정
     elif request.method == 'PUT':
         serializer = ReviewSerializer(review, data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -84,6 +77,7 @@ def review_create(request, movie_pk):
     # @permission_classes([IsAuthenticated])
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = ReviewSerializer(data=request.data)
+    print(request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(movie=movie)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -94,9 +88,12 @@ def review_create(request, movie_pk):
 @api_view(['POST'])
 def movie_like(request, movie_pk):
     movie = Movie.objects.get(pk=movie_pk)
+    # 좋아요 했었다면
     if movie.like_users.filter(pk=request.user.pk).exists():
+        # 좋아요 제거
         movie.like_users.remove(request.user)
     else:
+        # 좋아요 추가
         movie.like_users.add(request.user)
     serializer = MovieSerializer(movie)
     return Response(serializer.data)
@@ -107,9 +104,12 @@ def movie_like(request, movie_pk):
 @api_view(['POST'])
 def review_like(request, review_pk):
     review = Review.objects.get(pk=review_pk)
+    # 좋아요 했었다면
     if review.like_users.filter(pk=request.user.pk).exists():
+        # 좋아요 제거
         review.like_users.remove(request.user)
     else:
+        # 좋아요 추가
         review.like_users.add(request.user)
     serializer = ReviewSerializer(review)
     return Response(serializer.data)

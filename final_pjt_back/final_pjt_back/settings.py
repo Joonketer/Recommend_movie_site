@@ -80,11 +80,23 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
 
+    #     # spectacular Settings
+    #     # 'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    # }
+
+    # SPECTACULAR_SETTINGS = {
+    #     'TITLE': 'Your Project API',
+    #     'DESCRIPTION': 'Your project description',
+    #     'VERSION': '1.0.0',
+    #     'SERVE_INCLUDE_SCHEMA': False,
+    #     # OTHER SETTINGS
 }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
