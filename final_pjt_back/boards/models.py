@@ -5,7 +5,7 @@ from django.conf import settings
 
 class Board(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,  # 게시글 작성한 유저
-                             on_delete=models.CASCADE)
+                             on_delete=models.CASCADE, related_name='boards')
     like_users = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name='like_boards', blank=True, null=True)   # 좋아요한 사람들
     title = models.CharField(max_length=100)    # 제목
@@ -16,12 +16,15 @@ class Board(models.Model):
 
 
 class Comment(models.Model):
-    board = models.ForeignKey(Board, on_delete=models.CASCADE)  # 어떤 게시글인지
+    board = models.ForeignKey(
+        Board, on_delete=models.CASCADE, related_name='comments')  # 어떤 게시글인지
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)  # 댓글 작성한 유저
-    content = models.CharField(max_length=200)
+                             on_delete=models.CASCADE, related_name='comments')  # 댓글 작성한 유저
+    content = models.CharField(max_length=200)  # 댓글 내용
     created_at = models.DateTimeField(auto_now_add=True)    # 생성일
     updated_at = models.DateTimeField(auto_now=True)    # 수정일
+    like_users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name='like_comments')  # 댓글에 좋아요한 사람
 
     def __str__(self):
         return self.content

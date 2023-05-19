@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Movie, Genre, Review
+from .models import Movie, Genre, Review, Photo
 from django.contrib.auth import get_user_model
 
 
@@ -77,3 +77,30 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = '__all__'
         read_only_fields = ('user', 'movie',)
+
+# 추천알고리즘
+# - 최근 클릭한 10개의 디테일 영화의 장르 3개 가져와서 추천
+# - 마지막으로 본 상세 영화와 비슷한 영화 추천, tmdb Recommendations api 사용
+# - OpenWeatherMap api를 사용해서 현재 날씨와 비슷한 장르의 영화 추천
+
+
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photo
+        fields = ['id', 'user', 'genre_ids', 'movie', 'clicked_at']
+
+# # 코사인 유사도를 통해 좋아요를 누른 영화들 중 유사도가 높은 영화 가져오기
+
+
+# class LikedMovieSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Movie
+#         fields = '__all__'
+
+
+# class UserLikedMoviesSerializer(serializers.Serializer):
+#     user_liked_movies = LikedMovieSerializer(many=True)
+
+#     def to_representation(self, instance):
+#         data = super().to_representation(instance)
+#         return data['user_liked_movies']

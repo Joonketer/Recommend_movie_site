@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Movie, Review
+from .models import Movie, Review, Photo
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
-from .serializers import MovieListSerializer, MovieSerializer, ReviewListSerializer, ReviewSerializer
+from .serializers import MovieListSerializer, MovieSerializer, ReviewListSerializer, ReviewSerializer, PhotoSerializer, UserLikedMoviesSerializer
 # Create your views here.
 
 # 전체 영화
@@ -22,6 +22,7 @@ def movie_list(request):
         # movies = movie.objects.all()
         movies = get_list_or_404(Movie)
         serializer = MovieListSerializer(movies, many=True)
+        # print(serializer.data)
         return Response(serializer.data)
 
 # 영화 상세
@@ -113,3 +114,57 @@ def review_like(request, review_pk):
         review.like_users.add(request.user)
     serializer = ReviewSerializer(review)
     return Response(serializer.data)
+
+# 추천알고리즘1 (최근 클릭한 10개의 디테일 영화의 장르 3개 가져와서 추천)
+# 추천알고리즘2 (마지막으로 본 상세 영화와 비슷한 영화 추천, tmdb Recommendations api 사용)
+# 추천알고리즘3 (OpenWeatherMap api를 사용해서 현재 날씨와 비슷한 장르의 영화 추천)
+
+
+@api_view(['POST', 'GET'])
+def handle_clicked_photo(request):
+    # 영화를 클릭했다면
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            serializer = PhotoSerializer(data=request.data)
+            if serializer.is_valid():
+                user = request.user
+                photo_count = Photo.objects.filter(user=user).count()
+
+                if photo_count >= 10:
+                    # 가장 처음에 저장된 클릭 데이터 삭제
+                    oldest_photo = Photo.objects.filter(
+                        user=user).order_by('clicked_at').first()
+                    oldest_photo.delete()
+
+                serializer.save(user=user)
+                return Response({'message': 'Photo saved successfully.'}, status=201)
+            else:
+                return Response(serializer.errors, status=400)
+        else:
+            return Response({'message': 'User authentication required.'}, status=401)
+    elif request.method == 'GET':
+        if request.user.is_authenticated:
+            user = request.user
+            photos = Photo.objects.filter(
+                user=user).order_by('-clicked_at')[:10]
+            serializer = PhotoSerializer(photos, many=True)
+            return Response(serializer.data, status=200)
+        else:
+            # photos = get_list_or_404(Photo)
+            # serializer = PhotoSerializer(photos, many=True)
+            # return Response(serializer.data)
+            return Response({'message': 'User authentication required.'}, status=401)
+
+# # 코사인 유사도 사용
+
+
+# @api_view(['GET'])
+# def liked_movies(request):
+#     user = request.user  # 현재 인증된 사용자
+
+#     if user.is_authenticated:  # 인증된 사용자인지 확인
+#         liked_movies = user.like_movies.all()  # 사용자가 좋아요한 영화 목록
+#         serializer = UserLikedMoviesSerializer(liked_movies)
+#         return Response(serializer.data)
+#     else:
+#         return Response({'detail': 'User not authenticated'}, status=401)

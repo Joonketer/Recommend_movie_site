@@ -5,4 +5,6 @@ from django.db import models
 
 
 class User(AbstractUser):
-    pass
+    # 팔로잉 기능
+    followings = models.ManyToManyField(
+        'self', symmetrical=False, related_name='followers')

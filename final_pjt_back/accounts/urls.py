@@ -15,7 +15,10 @@ Including another URLconf
 """
 
 from django.urls import path, include
+from . import views
 
+app_name = 'profile'
 urlpatterns = [
+    path('<str:username>/', views.profile_follow, name="profile_follow"),
 
 ]

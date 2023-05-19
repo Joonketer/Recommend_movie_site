@@ -21,6 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # 영화 관련
     path('api/v1/', include('movies.urls')),
+    # 프로필,팔로우 관련
+    path('profile/', include('accounts.urls')),
     # 커뮤니티 관련
     path('api/v1/community/', include('boards.urls')),
     # 계정 관련

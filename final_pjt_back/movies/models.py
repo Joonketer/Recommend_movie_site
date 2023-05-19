@@ -42,3 +42,17 @@ class Review(models.Model):
     user_vote_average = models.FloatField()  # 평점
     created_at = models.DateTimeField(auto_now_add=True)  # 작성일
     updated_at = models.DateTimeField(auto_now=True)  # 수정일
+
+# 추천알고리즘
+
+
+class Photo(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    movie = models.ForeignKey(
+        "Movie", on_delete=models.CASCADE)
+    genre_ids = models.ManyToManyField(Genre)
+    clicked_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-clicked_at']
