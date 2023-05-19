@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
-from .serializers import MovieListSerializer, MovieSerializer, ReviewListSerializer, ReviewSerializer, PhotoSerializer, UserLikedMoviesSerializer
+from .serializers import MovieListSerializer, MovieSerializer, ReviewListSerializer, ReviewSerializer, PhotoSerializer
 # Create your views here.
 
 # 전체 영화
@@ -121,6 +121,7 @@ def review_like(request, review_pk):
 
 
 @api_view(['POST', 'GET'])
+# @permission_classes([IsAuthenticated])
 def handle_clicked_photo(request):
     # 영화를 클릭했다면
     if request.method == 'POST':
@@ -143,17 +144,16 @@ def handle_clicked_photo(request):
         else:
             return Response({'message': 'User authentication required.'}, status=401)
     elif request.method == 'GET':
-        if request.user.is_authenticated:
-            user = request.user
-            photos = Photo.objects.filter(
-                user=user).order_by('-clicked_at')[:10]
-            serializer = PhotoSerializer(photos, many=True)
-            return Response(serializer.data, status=200)
-        else:
-            # photos = get_list_or_404(Photo)
-            # serializer = PhotoSerializer(photos, many=True)
-            # return Response(serializer.data)
-            return Response({'message': 'User authentication required.'}, status=401)
+        user = request.user
+        photos = Photo.objects.filter(
+            user=user).order_by('-clicked_at')[:10]
+        serializer = PhotoSerializer(photos, many=True)
+        return Response(serializer.data, status=200)
+
+        # photos = get_list_or_404(Photo)
+        # serializer = PhotoSerializer(photos, many=True)
+        # return Response(serializer.data)
+        return Response({'message': 'User authentication required.'}, status=401)
 
 # # 코사인 유사도 사용
 

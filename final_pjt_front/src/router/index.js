@@ -5,6 +5,7 @@ import CreateView from '@/views/CreateView'
 import DetailView from '@/views/DetailView'
 import SignUpView from '@/views/SignUpView'
 import LogInView from '@/views/LogInView'
+import RecommendView from '@/views/RecommendView'
 
 
 Vue.use(VueRouter)
@@ -15,7 +16,13 @@ const routes = [
     name: 'ArticleView',
     component: ArticleView
   },
- 
+
+  {
+    path: '/recommend',
+    name: 'RecommendView',
+    component: RecommendView
+  },
+
   {
     path: '/create',
     name: 'CreateView',

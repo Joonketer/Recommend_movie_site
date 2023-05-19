@@ -18,7 +18,7 @@ def get_movies():
         movies = requests.get(url, headers=headers).json()
 
         for movie in movies['results']:
-            if movie.get('release_date', '') and movie.get('poster_path', ''):
+            if movie.get('release_date', '') and movie.get('poster_path', '') and not movie['adult']:
                 fields = {
                     'movie_id': movie['id'],
                     'title': movie['title'],

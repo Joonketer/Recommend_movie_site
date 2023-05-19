@@ -85,9 +85,12 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class PhotoSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
     class Meta:
         model = Photo
         fields = ['id', 'user', 'genre_ids', 'movie', 'clicked_at']
+        read_only_fields = ('user', 'movie',)
 
 # # 코사인 유사도를 통해 좋아요를 누른 영화들 중 유사도가 높은 영화 가져오기
 
