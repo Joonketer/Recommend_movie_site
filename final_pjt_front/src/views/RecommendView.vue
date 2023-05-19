@@ -2,16 +2,19 @@
   <div>
     <h1>추천페이지입니다</h1>
     <RecommendList />
+    <hr />
+    <WeatherItem />
   </div>
 </template>
 
 <script>
 import RecommendList from "@/components/RecommendList.vue";
-
+import WeatherItem from "@/components/WeatherItem.vue";
 export default {
   name: "RecommendView",
   components: {
     RecommendList,
+    WeatherItem,
   },
   computed: {
     isLogin() {
