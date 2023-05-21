@@ -11,7 +11,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
 from .serializers import MovieListSerializer, MovieSerializer, ReviewListSerializer, ReviewSerializer, PhotoSerializer
 
-
+from django.db.models import Q
 # Create your views here.
 
 # 전체 영화
@@ -128,11 +128,13 @@ def handle_clicked_photo(request):
     # 영화를 클릭했다면
     if request.method == 'POST':
         if request.user.is_authenticated:
+            print(request.data)
             serializer = PhotoSerializer(data=request.data)
             if serializer.is_valid():
+                
                 user = request.user
                 photo_count = Photo.objects.filter(user=user).count()
-
+                # print(photo_count,'here')
                 if photo_count >= 10:
                     # 가장 처음에 저장된 클릭 데이터 삭제
                     oldest_photo = Photo.objects.filter(
@@ -156,6 +158,23 @@ def handle_clicked_photo(request):
         # serializer = PhotoSerializer(photos, many=True)
         # return Response(serializer.data)
         return Response({'message': 'User authentication required.'}, status=401)
+
+# 장르 추천
+def getMoviesByGenre(genre):
+    # print(genre)
+    movies = Movie.objects.filter(genre_ids__in=[genre])
+    return movies
+
+@api_view(['GET'])
+def movie_genre(request, genre_id):
+    if genre_id:
+        movies = getMoviesByGenre(genre_id)
+    else:
+        movies = Movie.objects.all()
+
+    serializer = MovieListSerializer(movies, many=True)
+    return Response(serializer.data)
+
 
 # # 코사인 유사도 사용
 
