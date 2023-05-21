@@ -9,7 +9,13 @@
         <h2>{{ getGenreName(genre.id) }}</h2>
         <p v-for="movie in recommendedMovies[genre.id]" :key="movie.movie_id">
           {{ movie.title }}
+          <router-link
+      :to="{
+        name: 'DetailView',
+        params: { id: movie.movie_id },
+      }" >
           <img :src="getBackdropUrl(movie.poster_path)" alt="Backdrop Image" />
+          </router-link>
         </p>
       </div>
     </div>

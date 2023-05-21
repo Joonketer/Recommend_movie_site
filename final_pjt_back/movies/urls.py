@@ -29,6 +29,7 @@ urlpatterns = [
     path('reviews/<int:review_pk>/', views.review_detail),  # 상세 리뷰
     path('reviews/<int:review_pk>/like/', views.review_like),  # 영화 좋아요
     path('recent_moives/', views.handle_clicked_photo),  # 추천 알고리즘
+    path('<int:movie_id>/recommend_moives/', views.movie_movie),  # 영화 id 찾기
     # path('recommended/', views.liked_movies),
 
 

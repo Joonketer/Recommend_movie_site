@@ -176,6 +176,22 @@ def movie_genre(request, genre_id):
     serializer = MovieListSerializer(movies, many=True)
     return Response(serializer.data)
 
+# 장르 추천
+def getMoviesByMovie(movie):
+    # print(genre)
+    movies = Movie.objects.filter(movie_id=movie)
+    return movies
+
+@api_view(['GET'])
+def movie_movie(request, movie_id):
+    if movie_id:
+        movies = getMoviesByMovie(movie_id)
+    else:
+        movies = Movie.objects.all()
+
+    serializer = MovieListSerializer(movies, many=True)
+    return Response(serializer.data)
+
 
 # # 코사인 유사도 사용
 

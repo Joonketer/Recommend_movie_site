@@ -11,8 +11,13 @@
         <h2>{{ genre.name }}</h2>
         <p v-for="movie in recommendedMovies[genre.id]" :key="movie.movie_id">
           {{ movie.title }}
-          <img :src="getBackdropUrl(movie.poster_path)" alt="Backdrop Image" />
-          
+          <router-link
+      :to="{
+        name: 'DetailView',
+        params: { id: movie.movie_id },
+      }" >
+        <img :src="getBackdropUrl(movie.poster_path)" alt="Backdrop Image" />
+        </router-link>
         </p>
       </div>
     </div>
@@ -57,21 +62,21 @@ export default {
     fetchMovieGenres(weather) {
       // Define movie genres based on weather conditions
       const genreMap = {
-        Clear: [28, 12, 16, 99, 10751],
-        Clouds: [18, 14, 36, 10752],
-        Rain: [80, 18, 10749, 10402],
-        Snow: [28, 16, 10751, 10770],
-        Thunderstorm: [28, 27, 878],
-        Drizzle: [18, 35, 9648, 10402],
-        Mist: [18, 27, 53],
-        Smoke: [53, 27, 9648],
-        Haze: [28, 18, 10749],
-        Dust: [28, 18, 9648],
-        Fog: [18, 27, 53],
-        Sand: [28, 18, 9648, 37],
-        Ash: [28, 18, 9648],
-        Squall: [28, 18, 9648],
-        Tornado: [28, 878, 53],
+        Clear: [28, 12, 16, 99, 10751,35,878],
+        Clouds: [18, 14, 36, 10752,9648,53],
+        Rain: [80, 18, 10749, 10402,53],
+        Snow: [28, 16, 10751, 10770,35,18],
+        Thunderstorm: [28, 27, 878,99],
+        Drizzle: [18, 35, 9648, 10402,16],
+        Mist: [53, 27, 9648,80,10770],
+        Smoke: [53, 27, 9648,80,10770],
+        Haze: [28, 18, 10749,9648,53],
+        Dust: [28, 18, 9648,53],
+        Fog: [18, 27, 53,9648,80],
+        Sand: [28, 18, 9648, 37,878],
+        Ash: [53, 27, 9648,80,10770],
+        Squall: [80, 18, 10749, 10402,53],
+        Tornado: [28, 878, 53,10752],
       };
 
       // Fetch movie genres based on the weather condition
