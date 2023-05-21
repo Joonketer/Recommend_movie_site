@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3>날씨 api</h3>
     <h2>Current Weather: {{ weather }}</h2>
     <h3>Suggested Movie Genres:</h3>
     <div v-if="isLoading">
@@ -22,7 +23,7 @@
 import axios from "axios";
 
 export default {
-  name: "WeatherMovieGenres",
+  name: "WeatherList",
   data() {
     return {
       weather: "",
@@ -97,7 +98,7 @@ export default {
         .then((results) => {
           results.forEach((movies, index) => {
             const genreId = genres[index];
-            this.recommendedMovies[genreId] = movies.slice(0, 10);
+            this.recommendedMovies[genreId] = movies;
           });
           this.isLoading = false; // 데이터 로딩이 완료됨을 표시
         })
@@ -112,7 +113,7 @@ export default {
       
 
       return axios.get(API_URL).then((response) => {
-        const movies = response.data.slice(0, 10);
+        const movies = response.data;
         console.log(movies)
         return movies.map((movie) => {
           return {
