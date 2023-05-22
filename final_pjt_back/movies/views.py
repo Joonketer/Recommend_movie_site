@@ -11,7 +11,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
 from .serializers import MovieListSerializer, MovieSerializer, ReviewListSerializer, ReviewSerializer, PhotoSerializer
 
-
+from django.db.models import Q
 # Create your views here.
 
 # 전체 영화
@@ -128,15 +128,14 @@ def handle_clicked_photo(request):
     # 영화를 클릭했다면
     if request.method == 'POST':
         if request.user.is_authenticated:
+
             serializer = PhotoSerializer(data=request.data)
             if serializer.is_valid():
                 user = request.user
                 photo_count = Photo.objects.filter(user=user).count()
-
                 if photo_count >= 10:
                     # 가장 처음에 저장된 클릭 데이터 삭제
-                    oldest_photo = Photo.objects.filter(
-                        user=user).order_by('clicked_at').first()
+                    oldest_photo = Photo.objects.filter(user=user).order_by('clicked_at').first()
                     oldest_photo.delete()
 
                 serializer.save(user=user)
@@ -146,16 +145,53 @@ def handle_clicked_photo(request):
         else:
             return Response({'message': 'User authentication required.'}, status=401)
     elif request.method == 'GET':
-        user = request.user
-        photos = Photo.objects.filter(
-            user=user).order_by('-clicked_at')[:10]
-        serializer = PhotoSerializer(photos, many=True)
-        return Response(serializer.data, status=200)
+        # 마지막으로 클릭한 사진과 관련된 정보를 가져오는 코드
+            last_clicked_photo = Photo.objects.filter(user_id=request.user.id).order_by('-clicked_at').first()
+            print(request.user.id)
+            if last_clicked_photo:
+                # 마지막으로 클릭한 사진과 관련된 영화를 추천하는 코드
+                photos = Photo.objects.filter(user_id=last_clicked_photo.user_id)
+                # 나머지 코드 추가
 
-        # photos = get_list_or_404(Photo)
-        # serializer = PhotoSerializer(photos, many=True)
-        # return Response(serializer.data)
-        return Response({'message': 'User authentication required.'}, status=401)
+                serializer = PhotoSerializer(photos, many=True)
+                return Response(serializer.data, status=200)
+            else:
+                # 마지막으로 클릭한 사진이 없는 경우에 대한 처리
+                return Response({'message': 'No last clicked photo found.'}, status=404)
+        
+
+# 장르 추천
+def getMoviesByGenre(genre):
+    # print(genre)
+    movies = Movie.objects.filter(genre_ids__in=[genre]).order_by('-popularity')[:10]
+    return movies
+
+@api_view(['GET'])
+def movie_genre(request, genre_id):
+    if genre_id:
+        movies = getMoviesByGenre(genre_id)
+    else:
+        movies = Movie.objects.all()
+
+    serializer = MovieListSerializer(movies, many=True)
+    return Response(serializer.data)
+
+# 장르 추천
+def getMoviesByMovie(movie):
+    # print(genre)
+    movies = Movie.objects.filter(movie_id=movie)
+    return movies
+
+@api_view(['GET'])
+def movie_movie(request, movie_id):
+    if movie_id:
+        movies = getMoviesByMovie(movie_id)
+    else:
+        movies = Movie.objects.all()
+
+    serializer = MovieListSerializer(movies, many=True)
+    return Response(serializer.data)
+
 
 # # 코사인 유사도 사용
 

@@ -7,7 +7,7 @@ class Board(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,  # 게시글 작성한 유저
                              on_delete=models.CASCADE, related_name='boards')
     like_users = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, related_name='like_boards', blank=True, null=True)   # 좋아요한 사람들
+        settings.AUTH_USER_MODEL, related_name='like_boards')   # 좋아요한 사람들
     title = models.CharField(max_length=100)    # 제목
     board_type = models.IntegerField(default=0)  # 말머리(기본값 0 : 자유게시판)
     content = models.TextField()    # 내용
