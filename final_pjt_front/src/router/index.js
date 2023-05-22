@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import ArticleView from '@/views/ArticleView'
 import CreateView from '@/views/CreateView'
 import DetailView from '@/views/DetailView'
+import DetailSearchView from '@/views/DetailSearchView'
 import SignUpView from '@/views/SignUpView'
 import LogInView from '@/views/LogInView'
 import RecommendView from '@/views/RecommendView'
@@ -45,6 +46,12 @@ const routes = [
     path: '/:id',
     name: 'DetailView',
     component: DetailView,
+  },
+
+  {
+    path: '/search/:id',
+    name: 'DetailSearchView',
+    component: DetailSearchView,
   },
 
 ]

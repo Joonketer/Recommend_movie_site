@@ -64,19 +64,19 @@ class ReviewListSerializer(serializers.ModelSerializer):
         model = Review
         fields = '__all__'
 
-# 상세 리뷰
-
 
 class ReviewSerializer(serializers.ModelSerializer):
     class MovieSerializer(serializers.ModelSerializer):
         class Meta:
             model = Movie
             fields = ('id', 'title', )
+    movie = MovieSerializer(read_only=True)
+    user = UserSerializer(read_only=True)
 
     class Meta:
         model = Review
+        # fields = ('content', 'user_vote_average', 'created_at', 'user', 'movie','id')
         fields = '__all__'
-        read_only_fields = ('user', 'movie',)
 
 # 추천알고리즘
 # - 최근 클릭한 10개의 디테일 영화의 장르 3개 가져와서 추천

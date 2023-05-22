@@ -1,9 +1,7 @@
 <template>
   <div class="article-list">
     <h3>마지막 클릭한 사진과 관련된 정보</h3>
-    <div v-if="isLoading">
-      Loading...
-    </div>
+    <div v-if="isLoading">Loading...</div>
     <div v-else>
       <div v-if="lastClickedPhoto">
         <p>{{ lastClickedPhoto.movie }}</p>
@@ -12,15 +10,29 @@
       <div v-if="movie_list">
         <div v-for="movie in movie_list" :key="movie.id">
           {{ movie.title }}
-          <router-link
-      :to="{
-        name: 'DetailView',
-        params: { id: movie.movie_id },
-      }" >
-          <img :src="getBackdropUrl(movie.poster_path)" alt="Backdrop Image" />
-          </router-link>
+          {{ movie.id }}
+          <div v-if="movie_detail">
+            <router-link
+              :to="{
+                name: 'DetailSearchView',
+                params: { id: movie.id },
+                query: { movieDetail: JSON.stringify(movie_detail) },
+              }"
+            >
+              <img
+                :src="getBackdropUrl(movie.poster_path)"
+                alt="Backdrop Image"
+              />
+            </router-link>
+          </div>
+          <div v-else>
+            <img
+              :src="getBackdropUrl(movie.poster_path)"
+              alt="Backdrop Image"
+              @click="fetchDetail(movie.id)"
+            />
+          </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -38,6 +50,7 @@ export default {
       lastClickedPhoto: null,
       Movies_title: null,
       movie_list: null,
+      movie_detail: null,
     };
   },
   mounted() {
@@ -47,13 +60,37 @@ export default {
     ...mapState(["token"]),
   },
   methods: {
+    fetchDetail(movie_id) {
+      const API_URL = `https://api.themoviedb.org/3/movie/${movie_id}?language=ko-kor`;
+
+      const headers = {
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTRmODVmMDA1ZDExODVkNjg3Y2Q1ZjE3NTRjY2MyZCIsInN1YiI6IjYzZDIyZDFiY2I3MWI4MDA3YzFiOGNlYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.zwYescz-jNoCc_X2jDOxOz90oofdYLmxwwkH5XuDmGs",
+      };
+      axios
+        .get(API_URL, { headers })
+        .then((response) => {
+          this.movie_detail = response.data;
+
+          console.log("영화 디테일");
+          console.log(this.movie_detail);
+
+          // 영화 정보를 가져온 후에 router-link를 사용하여 이미지를 렌더링합니다.
+          // 이로써 movie.id가 null이 되지 않습니다.
+        })
+        .catch((error) => {
+          console.error("Error fetching movie:", error);
+        });
+    },
     fetchSearch() {
       console.log(this.Movies_title);
       const API_URL = `https://api.themoviedb.org/3/search/movie?query=${this.Movies_title}&include_adult=false&language=ko-KOR&page=1`;
 
       const headers = {
         accept: "application/json",
-        Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTRmODVmMDA1ZDExODVkNjg3Y2Q1ZjE3NTRjY2MyZCIsInN1YiI6IjYzZDIyZDFiY2I3MWI4MDA3YzFiOGNlYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.zwYescz-jNoCc_X2jDOxOz90oofdYLmxwwkH5XuDmGs",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTRmODVmMDA1ZDExODVkNjg3Y2Q1ZjE3NTRjY2MyZCIsInN1YiI6IjYzZDIyZDFiY2I3MWI4MDA3YzFiOGNlYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.zwYescz-jNoCc_X2jDOxOz90oofdYLmxwwkH5XuDmGs",
       };
 
       axios
@@ -86,7 +123,10 @@ export default {
           this.isLoading = false;
         })
         .catch((error) => {
-          console.error("최근 클릭한 사진을 가져오는 중 오류가 발생했습니다:", error);
+          console.error(
+            "최근 클릭한 사진을 가져오는 중 오류가 발생했습니다:",
+            error
+          );
           this.isLoading = false;
         });
     },
@@ -119,7 +159,7 @@ export default {
 ul {
   margin-left: 1rem;
 }
-img{
+img {
   width: 100px;
   height: 100px;
 }

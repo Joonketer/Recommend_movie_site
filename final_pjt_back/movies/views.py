@@ -76,14 +76,14 @@ def review_detail(request, review_pk):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def review_create(request, movie_pk):
-    # @permission_classes([IsAuthenticated])
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = ReviewSerializer(data=request.data)
-    print(request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(movie=movie)
+        serializer.save(movie=movie, user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 # 영화 좋아요
 
@@ -135,7 +135,8 @@ def handle_clicked_photo(request):
                 photo_count = Photo.objects.filter(user=user).count()
                 if photo_count >= 10:
                     # 가장 처음에 저장된 클릭 데이터 삭제
-                    oldest_photo = Photo.objects.filter(user=user).order_by('clicked_at').first()
+                    oldest_photo = Photo.objects.filter(
+                        user=user).order_by('clicked_at').first()
                     oldest_photo.delete()
 
                 serializer.save(user=user)
@@ -146,25 +147,28 @@ def handle_clicked_photo(request):
             return Response({'message': 'User authentication required.'}, status=401)
     elif request.method == 'GET':
         # 마지막으로 클릭한 사진과 관련된 정보를 가져오는 코드
-            last_clicked_photo = Photo.objects.filter(user_id=request.user.id).order_by('-clicked_at').first()
-            print(request.user.id)
-            if last_clicked_photo:
-                # 마지막으로 클릭한 사진과 관련된 영화를 추천하는 코드
-                photos = Photo.objects.filter(user_id=last_clicked_photo.user_id)
-                # 나머지 코드 추가
+        last_clicked_photo = Photo.objects.filter(
+            user_id=request.user.id).order_by('-clicked_at').first()
+        print(request.user.id)
+        if last_clicked_photo:
+            # 마지막으로 클릭한 사진과 관련된 영화를 추천하는 코드
+            photos = Photo.objects.filter(user_id=last_clicked_photo.user_id)
+            # 나머지 코드 추가
 
-                serializer = PhotoSerializer(photos, many=True)
-                return Response(serializer.data, status=200)
-            else:
-                # 마지막으로 클릭한 사진이 없는 경우에 대한 처리
-                return Response({'message': 'No last clicked photo found.'}, status=404)
-        
+            serializer = PhotoSerializer(photos, many=True)
+            return Response(serializer.data, status=200)
+        else:
+            # 마지막으로 클릭한 사진이 없는 경우에 대한 처리
+            return Response({'message': 'No last clicked photo found.'}, status=404)
+
 
 # 장르 추천
 def getMoviesByGenre(genre):
     # print(genre)
-    movies = Movie.objects.filter(genre_ids__in=[genre]).order_by('-popularity')[:10]
+    movies = Movie.objects.filter(
+        genre_ids__in=[genre]).order_by('-popularity')[:10]
     return movies
+
 
 @api_view(['GET'])
 def movie_genre(request, genre_id):
@@ -177,10 +181,13 @@ def movie_genre(request, genre_id):
     return Response(serializer.data)
 
 # 장르 추천
+
+
 def getMoviesByMovie(movie):
     # print(genre)
     movies = Movie.objects.filter(movie_id=movie)
     return movies
+
 
 @api_view(['GET'])
 def movie_movie(request, movie_id):

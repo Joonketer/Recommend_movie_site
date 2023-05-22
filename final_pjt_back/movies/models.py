@@ -14,7 +14,7 @@ class Genre(models.Model):
 
 
 class Movie(models.Model):
-    movie_id = models.IntegerField(primary_key=True)  # 키 값
+    movie_id = models.IntegerField()  # 키 값
     title = models.CharField(max_length=100)    # 영화제목
     release_date = models.DateField()   # 개봉일
     popularity = models.FloatField()    # 인기도
