@@ -1,8 +1,11 @@
+from rest_framework.decorators import api_view, permission_classes
+from django.http import QueryDict
 from django.shortcuts import render
 from .models import Movie, Review, Photo
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -10,14 +13,26 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
 from .serializers import MovieListSerializer, MovieSerializer, ReviewListSerializer, ReviewSerializer, PhotoSerializer
-
+from django.http import JsonResponse
 from django.db.models import Q
 # Create your views here.
+
+# 영화 존재 여부
+
+
+def check_if_movie_exists(request, movie_id):
+    try:
+        movie = Movie.objects.get(id=movie_id)
+        exists = True
+    except Movie.DoesNotExist:
+        exists = False
+
+    return JsonResponse({"exists": exists})
 
 # 전체 영화
 
 
-@api_view(['GET',])
+@api_view(['GET', 'POST'])
 # @permission_classes([IsAuthenticated])
 def movie_list(request):
     if request.method == 'GET':
@@ -26,6 +41,12 @@ def movie_list(request):
         serializer = MovieListSerializer(movies, many=True)
         # print(serializer.data)
         return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = MovieSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            # serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 # 영화 상세
 
@@ -83,17 +104,6 @@ def review_create(request, movie_pk):
     if serializer.is_valid(raise_exception=True):
         serializer.save(movie=movie, user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def review_create_search(request):
-    serializer = ReviewSerializer(data=request.data)
-    if serializer.is_valid(raise_exception=True):
-        serializer.save(user=request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 # 영화 좋아요
 

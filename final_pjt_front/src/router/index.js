@@ -7,7 +7,7 @@ import DetailSearchView from '@/views/DetailSearchView'
 import SignUpView from '@/views/SignUpView'
 import LogInView from '@/views/LogInView'
 import RecommendView from '@/views/RecommendView'
-
+import SearchView from '@/views/SearchView'
 
 Vue.use(VueRouter)
 
@@ -53,6 +53,13 @@ const routes = [
     name: 'DetailSearchView',
     component: DetailSearchView,
   },
+
+  {
+    path: '/search_detail/',
+    name: 'SearchView',
+    component: SearchView,
+  },
+
 
 ]
 

@@ -12,18 +12,11 @@
           {{ movie.title }}
           {{ movie.id }}
           <div v-if="movie_detail">
-            <router-link
-              :to="{
-                name: 'DetailSearchView',
-                params: { id: movie.id },
-                query: { movieDetail: JSON.stringify(movie_detail) },
-              }"
-            >
-              <img
-                :src="getBackdropUrl(movie.poster_path)"
-                alt="Backdrop Image"
-              />
-            </router-link>
+            <img
+              :src="getBackdropUrl(movie.poster_path)"
+              alt="Backdrop Image"
+              @click="fetchDetail(movie.id)"
+            />
           </div>
           <div v-else>
             <img
@@ -47,8 +40,8 @@ export default {
   data() {
     return {
       isLoading: true,
-      lastClickedPhoto: null,
-      Movies_title: null,
+      lastClickedPhoto: {},
+      Movies_title: "",
       movie_list: null,
       movie_detail: null,
     };
@@ -76,11 +69,26 @@ export default {
           console.log("영화 디테일");
           console.log(this.movie_detail);
 
-          // 영화 정보를 가져온 후에 router-link를 사용하여 이미지를 렌더링합니다.
-          // 이로써 movie.id가 null이 되지 않습니다.
+          // 영화가 데이터베이스에 존재하는지 확인합니다.
+          this.checkIfMovieExists(movie_id)
+            .then((exists) => {
+              if (!exists) {
+                // 영화가 데이터베이스에 존재하지 않는 경우, 데이터베이스에 추가합니다.
+                this.addMovieToDatabase(movie_id);
+              } else {
+                // 영화가 이미 존재하는 경우, 상세 보기로 이동합니다.
+                this.navigateToDetail(movie_id);
+              }
+            })
+            .catch((error) => {
+              console.error(
+                "영화 존재 여부 확인 중 오류가 발생했습니다:",
+                error
+              );
+            });
         })
         .catch((error) => {
-          console.error("Error fetching movie:", error);
+          console.error("영화를 가져오는 중 오류가 발생했습니다:", error);
         });
     },
     fetchSearch() {
@@ -112,6 +120,8 @@ export default {
         .get(API_URL, { headers: { Authorization: `Token ${this.token}` } })
         .then((response) => {
           const photos = response.data;
+          console.log("포토", photos);
+          console.log("포토", photos.length);
           if (photos.length > 0) {
             this.lastClickedPhoto = photos[0];
             console.log(photos[0]);
@@ -150,6 +160,44 @@ export default {
     getBackdropUrl(backdropPath) {
       const baseUrl = "https://image.tmdb.org/t/p/original";
       return `${baseUrl}${backdropPath}`;
+    },
+    checkIfMovieExists(movie_id) {
+      // 주어진 ID의 영화가 데이터베이스에 존재하는지 확인하기 위해 API 요청을 수행합니다.
+      const API_URL = `http://127.0.0.1:8000/api/v1/movies/${movie_id}/exists/`;
+
+      return axios
+        .get(API_URL)
+        .then((response) => {
+          const movieData = response.data;
+          console.log("영화 데이터:", movieData);
+          return movieData !== null; // 영화가 존재하는 경우 true를 반환하고, 그렇지 않은 경우 false를 반환합니다.
+        })
+        .catch((error) => {
+          console.error("영화 존재 여부 확인 중 오류가 발생했습니다:", error);
+        });
+    },
+    addMovieToDatabase(movie_id) {
+      // 데이터베이스에 영화를 추가하기 위해 API 요청을 수행합니다.
+      const API_URL = `http://127.0.0.1:8000/api/v1/movies/`;
+
+      const movieData = {
+        movie_id: movie_id,
+        // 필요한 다른 영화 정보도 추가할 수 있습니다.
+      };
+
+      axios
+        .post(API_URL, movieData)
+        .then(() => {
+          console.log("영화를 데이터베이스에 추가했습니다.");
+          this.navigateToDetail(movie_id);
+        })
+        .catch((error) => {
+          console.error("영화 추가 중 오류가 발생했습니다:", error);
+        });
+    },
+    navigateToDetail(movie_id) {
+      // 영화의 상세 보기(detail view)로 이동합니다.
+      this.$router.push({ name: "DetailView", params: { id: movie_id } });
     },
   },
 };

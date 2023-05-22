@@ -13,7 +13,10 @@
         alt="Backdrop Image"
       />
     </p>
-
+    <!-- 영화 좋아요 버튼 -->
+    <button @click="likeMovie(article.movie_id)">
+      좋아요 {{ article?.like_users.length || 0 }}개
+    </button>
     <hr />
     <!-- 리뷰 작성 폼 -->
     <form @submit.prevent="submitReview">
@@ -53,9 +56,6 @@
 import axios from "axios";
 import { mapState } from "vuex";
 
-axios.defaults.xsrfCookieName = "csrftoken"; // Django에서 설정한 CSRF 토큰 쿠키 이름
-axios.defaults.xsrfHeaderName = "X-CSRFToken"; // Django에서 설정한 CSRF 토큰을 전송할 헤더 이름
-
 const API_URL = "http://127.0.0.1:8000";
 export default {
   name: "DetailSearchView",
@@ -64,45 +64,48 @@ export default {
       movieDetail: null,
       reviewContent: "",
       user_vote_average: 1,
-      currentUser: "", // 현재 로그인된 사용자 이름
+      currentUser: "",
       user_id: null,
-      csrftoken: "", // CSRF 토큰 값
     };
   },
   computed: {
     ...mapState(["token"]),
   },
   created() {
-    this.getCurrentUser(); // 현재 로그인된 사용자 정보를 가져오는 메소드 호출
+    this.getCurrentUser();
     const movieDetailParam = this.$route.query.movieDetail;
     if (movieDetailParam) {
       this.movieDetail = JSON.parse(movieDetailParam);
     }
-    this.setCSRFToken(); // CSRF 토큰 값을 설정하는 메소드 호출
   },
   methods: {
-    setCSRFToken() {
-      // Django에서 제공하는 csrf_token 템플릿 태그를 사용하여 CSRF 토큰 값을 가져옴
-      const csrfToken = document
-        .getElementsByName("csrfmiddlewaretoken")[0]
-        .getAttribute("value");
-      this.csrftoken = csrfToken; // CSRF 토큰 값을 데이터에 저장
+    likeMovie(movieId) {
+      axios({
+        method: "post",
+        url: `${API_URL}/api/v1/movies/${movieId}/like/`,
+        headers: { Authorization: `Token ${this.token}` },
+      })
+        .then(() => {
+          this.getArticleDetail();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     getBackdropUrl(backdropPath) {
       const baseUrl = "https://image.tmdb.org/t/p/original";
       return `${baseUrl}${backdropPath}`;
     },
     getCurrentUser() {
-      // 현재 로그인된 사용자 정보를 가져오는 API 호출
       axios({
         method: "get",
-        url: `${API_URL}/accounts/user/`, // 사용자 정보를 반환하는 API 엔드포인트
+        url: `${API_URL}/accounts/user/`,
         headers: { Authorization: `Token ${this.token}` },
       })
         .then((res) => {
           console.log("로그인");
           console.log(res);
-          this.currentUser = res.data.username; // 사용자 이름을 데이터에 저장
+          this.currentUser = res.data.username;
           this.user_id = res.data.pk;
         })
         .catch((err) => {
@@ -113,13 +116,13 @@ export default {
       console.log("아이디", this.user_id);
       console.log("무비아이디", this.movieDetail?.id);
       if (this.reviewContent) {
-        const movie = this.movieDetail?.id;
+        const movie_id = this.movieDetail?.id;
         const content = this.reviewContent;
         const user_vote_average = this.user_vote_average;
         const user_id = this.user_id;
 
         const payload = {
-          movie,
+          movie_id,
           content,
           user_vote_average,
           user_id,
@@ -127,15 +130,14 @@ export default {
         console.log(payload);
         axios({
           method: "post",
-          url: `${API_URL}/api/v1/movies/search/review/`,
+          url: `${API_URL}/api/v1/movies/search/`,
           headers: {
             Authorization: `Token ${this.token}`,
-            "X-CSRFToken": this.csrftoken, // CSRF 토큰 값을 헤더에 추가
           },
           data: payload,
         })
           .then(() => {
-            this.fetchDetail(this.movieDetail.id);
+            this.fetchDetail(this.movieDetail?.id);
             this.reviewContent = "";
             this.user_vote_average = 1;
           })
@@ -155,13 +157,10 @@ export default {
       axios
         .get(API_URL, { headers })
         .then((response) => {
-          this.movie_detail = response.data;
+          this.movieDetail = response.data;
 
           console.log("영화 디테일");
-          console.log(this.movie_detail);
-
-          // 영화 정보를 가져온 후에 router-link를 사용하여 이미지를 렌더링합니다.
-          // 이로써 movie.id가 null이 되지 않습니다.
+          console.log(this.movieDetail);
         })
         .catch((error) => {
           console.error("Error fetching movie:", error);

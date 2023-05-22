@@ -10,7 +10,13 @@
       포스터:
       <img :src="getBackdropUrl(article?.backdrop_path)" alt="Backdrop Image" />
     </p>
-
+    <!-- 영화 좋아요 버튼 -->
+    <button @click="likeMovie(article.movie_id)">
+      좋아요
+      {{
+        (Array.isArray(article?.like_users) && article?.like_users.length) || 0
+      }}개
+    </button>
     <hr />
     <!-- 리뷰 작성 폼 -->
     <form @submit.prevent="submitReview">
@@ -29,6 +35,7 @@
       <p>작성자: {{ currentUser }}</p>
       <button type="submit">리뷰 작성</button>
     </form>
+    <hr />
 
     <!-- 작성된 리뷰 목록 -->
     <div v-if="article.reviews && article.reviews.length > 0">
@@ -37,6 +44,13 @@
         <li v-for="review in article.reviews" :key="review.id">
           {{ review.content }} - 평점: {{ review.user_vote_average }} - 작성자:
           {{ review.user }}
+          <button @click="likeReview(review.id)">
+            좋아요
+            {{
+              (Array.isArray(review?.like_users) && review.like_users.length) ||
+              0
+            }}개
+          </button>
         </li>
       </ul>
     </div>
@@ -71,6 +85,32 @@ export default {
     this.getArticleDetail();
   },
   methods: {
+    likeReview(reviewId) {
+      axios({
+        method: "post",
+        url: `${API_URL}/api/v1/reviews/${reviewId}/like/`,
+        headers: { Authorization: `Token ${this.token}` },
+      })
+        .then(() => {
+          this.getArticleDetail();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    likeMovie(movieId) {
+      axios({
+        method: "post",
+        url: `${API_URL}/api/v1/movies/${movieId}/like/`,
+        headers: { Authorization: `Token ${this.token}` },
+      })
+        .then(() => {
+          this.getArticleDetail();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     getArticleDetail() {
       axios({
         method: "get",
