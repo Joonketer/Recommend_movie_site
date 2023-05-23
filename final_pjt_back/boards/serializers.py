@@ -32,6 +32,7 @@ class BoardSerializer(serializers.ModelSerializer):
             fields = ('id', 'user', 'content', 'created_at', 'updated_at')
     comments = CommentSerializer(many=True, read_only=True)
     user = UserSerializer(read_only=True)
+    like_users = UserSerializer(read_only=True, many=True)
 
     class Meta:
         model = Board

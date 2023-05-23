@@ -16,12 +16,12 @@ class Genre(models.Model):
 class Movie(models.Model):
     movie_id = models.IntegerField()  # 키 값
     title = models.CharField(max_length=100)    # 영화제목
-    release_date = models.DateField()   # 개봉일
-    popularity = models.FloatField()    # 인기도
-    vote_average = models.FloatField()  # 평점
-    vote_count = models.IntegerField()
-    overview = models.TextField()  # 줄거리
-    poster_path = models.CharField(max_length=200)  # 사진
+    release_date = models.DateField(null=True)   # 개봉일
+    popularity = models.FloatField(null=True)    # 인기도
+    vote_average = models.FloatField(null=True)  # 평점
+    vote_count = models.IntegerField(null=True)
+    overview = models.TextField(null=True)  # 줄거리
+    poster_path = models.CharField(max_length=200, null=True)  # 사진
     backdrop_path = models.CharField(max_length=200, null=True)
     genre_ids = models.ManyToManyField(Genre)   # 장르
     like_users = models.ManyToManyField(

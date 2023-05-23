@@ -1,21 +1,22 @@
 <template>
   <div>
     <h1>Detail</h1>
-    <p>글 번호: {{ movieDetail?.id }}</p>
-    <p>제목: {{ movieDetail?.title }}</p>
-    <p>내용: {{ movieDetail?.overview }}</p>
-    <p>개봉일: {{ movieDetail?.release_date }}</p>
-    <p>장르: {{ movieDetail?.genres }}</p>
+    <p>여기: {{ article }}</p>
+    <p>글 번호: {{ article?.movie_id }}</p>
+    <p>제목: {{ article?.title }}</p>
+    <p>내용: {{ article?.overview }}</p>
+    <p>개봉일: {{ article?.release_date }}</p>
+    <p>장르: {{ article?.genre_ids }}</p>
     <p>
       포스터:
-      <img
-        :src="getBackdropUrl(movieDetail?.poster_path)"
-        alt="Backdrop Image"
-      />
+      <img :src="getBackdropUrl(article?.poster_path)" alt="Backdrop Image" />
     </p>
     <!-- 영화 좋아요 버튼 -->
-    <button @click="likeMovie(article.movie_id)">
-      좋아요 {{ article?.like_users.length || 0 }}개
+    <button @click="likeMovie(article.id)">
+      좋아요
+      {{
+        (Array.isArray(article?.like_users) && article?.like_users.length) || 0
+      }}개
     </button>
     <hr />
     <!-- 리뷰 작성 폼 -->
@@ -35,14 +36,22 @@
       <p>작성자: {{ currentUser }}</p>
       <button type="submit">리뷰 작성</button>
     </form>
+    <hr />
 
     <!-- 작성된 리뷰 목록 -->
-    <div v-if="movieDetail.reviews && movieDetail.reviews.length > 0">
+    <div v-if="article.reviews && article.reviews.length > 0">
       <h2>리뷰 목록</h2>
       <ul>
-        <li v-for="review in movieDetail.reviews" :key="review.id">
+        <li v-for="review in article.reviews" :key="review.id">
           {{ review.content }} - 평점: {{ review.user_vote_average }} - 작성자:
           {{ review.user }}
+          <button @click="likeReview(review.id)">
+            좋아요
+            {{
+              (Array.isArray(review?.like_users) && review.like_users.length) ||
+              0
+            }}개
+          </button>
         </li>
       </ul>
     </div>
@@ -55,30 +64,41 @@
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
-
 const API_URL = "http://127.0.0.1:8000";
 export default {
   name: "DetailSearchView",
+  created() {
+    this.getCurrentUser(); // 현재 로그인된 사용자 정보를 가져오는 메소드 호출
+    this.getArticleDetail();
+    // $route.params에서 전달된 movieData 객체를 가져옵니다.
+    // this.article = this.$route.params;
+  },
   data() {
     return {
-      movieDetail: null,
+      article: {},
       reviewContent: "",
       user_vote_average: 1,
-      currentUser: "",
+      currentUser: "", // 현재 로그인된 사용자 이름
       user_id: null,
     };
   },
   computed: {
     ...mapState(["token"]),
   },
-  created() {
-    this.getCurrentUser();
-    const movieDetailParam = this.$route.query.movieDetail;
-    if (movieDetailParam) {
-      this.movieDetail = JSON.parse(movieDetailParam);
-    }
-  },
   methods: {
+    likeReview(reviewId) {
+      axios({
+        method: "post",
+        url: `${API_URL}/api/v1/reviews/${reviewId}/like/`,
+        headers: { Authorization: `Token ${this.token}` },
+      })
+        .then(() => {
+          this.getArticleDetail();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     likeMovie(movieId) {
       axios({
         method: "post",
@@ -92,52 +112,62 @@ export default {
           console.log(err);
         });
     },
+    getArticleDetail() {
+      axios({
+        method: "get",
+        url: `${API_URL}/api/v1/movies/${this.$route.params.id}/`,
+      })
+        .then((res) => {
+          console.log(res);
+          this.article = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     getBackdropUrl(backdropPath) {
       const baseUrl = "https://image.tmdb.org/t/p/original";
       return `${baseUrl}${backdropPath}`;
     },
     getCurrentUser() {
+      // 현재 로그인된 사용자 정보를 가져오는 API 호출
       axios({
         method: "get",
-        url: `${API_URL}/accounts/user/`,
+        url: `${API_URL}/accounts/user/`, // 사용자 정보를 반환하는 API 엔드포인트
         headers: { Authorization: `Token ${this.token}` },
       })
         .then((res) => {
           console.log("로그인");
           console.log(res);
-          this.currentUser = res.data.username;
+          this.currentUser = res.data.username; // 사용자 이름을 데이터에 저장
           this.user_id = res.data.pk;
+
+          // 사용자 정보를 가져온 후에 리뷰를 가져오는 메소드 호출
+          this.getArticleDetail();
         })
         .catch((err) => {
           console.log(err);
         });
     },
     submitReview() {
-      console.log("아이디", this.user_id);
-      console.log("무비아이디", this.movieDetail?.id);
       if (this.reviewContent) {
-        const movie_id = this.movieDetail?.id;
-        const content = this.reviewContent;
-        const user_vote_average = this.user_vote_average;
-        const user_id = this.user_id;
+        console.log("아이디", this.user_id);
+        console.log("무비아이디", this.article?.movie_id);
 
-        const payload = {
-          movie_id,
-          content,
-          user_vote_average,
-          user_id,
-        };
-        console.log(payload);
+        const formData = new FormData();
+        formData.append("movie", this.article.id);
+        formData.append("content", this.reviewContent);
+        formData.append("user_vote_average", this.user_vote_average);
+        formData.append("user_id", this.user_id);
+
         axios({
           method: "post",
-          url: `${API_URL}/api/v1/movies/search/`,
-          headers: {
-            Authorization: `Token ${this.token}`,
-          },
-          data: payload,
+          url: `${API_URL}/api/v1/movies/${this.article?.id}/review/`,
+          headers: { Authorization: `Token ${this.token}` },
+          data: formData,
         })
           .then(() => {
-            this.fetchDetail(this.movieDetail?.id);
+            this.getArticleDetail();
             this.reviewContent = "";
             this.user_vote_average = 1;
           })
@@ -145,26 +175,6 @@ export default {
             console.log(err);
           });
       }
-    },
-    fetchDetail(movie_id) {
-      const API_URL = `https://api.themoviedb.org/3/movie/${movie_id}?language=ko-kor`;
-
-      const headers = {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTRmODVmMDA1ZDExODVkNjg3Y2Q1ZjE3NTRjY2MyZCIsInN1YiI6IjYzZDIyZDFiY2I3MWI4MDA3YzFiOGNlYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.zwYescz-jNoCc_X2jDOxOz90oofdYLmxwwkH5XuDmGs",
-      };
-      axios
-        .get(API_URL, { headers })
-        .then((response) => {
-          this.movieDetail = response.data;
-
-          console.log("영화 디테일");
-          console.log(this.movieDetail);
-        })
-        .catch((error) => {
-          console.error("Error fetching movie:", error);
-        });
     },
   },
 };

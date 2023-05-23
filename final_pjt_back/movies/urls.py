@@ -17,11 +17,14 @@ Including another URLconf
 from django.urls import path, include
 from . import views
 
+
 app_name = 'movies'
 
 urlpatterns = [
     path("movies/", views.movie_list, name="movie_list"),   # 전체 영화
     path('movies/<int:movie_pk>/', views.movie_detail),  # 상세 영화
+    path('movies/<int:movie_id>/make/',
+         views.get, name='movie-detail'),
     path('movies/<int:movie_pk>/review/', views.review_create),  # 영화 리뷰 작성
     path('movies/<int:movie_pk>/like/', views.movie_like),  # 영화 좋아요
     path('movies/<int:genre_id>/genre/', views.movie_genre),  # 장르로 찾기

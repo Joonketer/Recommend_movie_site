@@ -8,10 +8,10 @@
     <p>장르: {{ article?.genre_ids }}</p>
     <p>
       포스터:
-      <img :src="getBackdropUrl(article?.backdrop_path)" alt="Backdrop Image" />
+      <img :src="getBackdropUrl(article?.poster_path)" alt="Backdrop Image" />
     </p>
     <!-- 영화 좋아요 버튼 -->
-    <button @click="likeMovie(article.movie_id)">
+    <button @click="likeMovie(article.id)">
       좋아요
       {{
         (Array.isArray(article?.like_users) && article?.like_users.length) || 0
@@ -161,7 +161,7 @@ export default {
 
         axios({
           method: "post",
-          url: `${API_URL}/api/v1/movies/${this.article?.movie_id}/review/`,
+          url: `${API_URL}/api/v1/movies/${this.article?.id}/review/`,
           headers: { Authorization: `Token ${this.token}` },
           data: formData,
         })

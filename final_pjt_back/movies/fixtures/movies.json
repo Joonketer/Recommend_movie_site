@@ -38462,6 +38462,27 @@
         }
     },
     {
+        "pk": 299,
+        "model": "movies.movie",
+        "fields": {
+            "movie_id": 299,
+            "title": "오션스 일레븐",
+            "release_date": "1960-08-10",
+            "popularity": 12.957,
+            "vote_average": 6.449,
+            "vote_count": 282,
+            "overview": "소문난 도둑 대니 오션은 뉴저지 감옥으로부터 출소한 후 채 24시간이 되기도 전에 '한탕'을 구상한다. 그는 최상급 라스베가스 호텔 세 곳의 카지노로부터 1억 5천만불을 터는 희대의 범죄를 계획하고, 작업에 동참할 11명의 멤버를 모은다. 목표로 삼은 카지노들은 품위를 갖춘 동시에 냉혹한 기업가인 테리 베네딕트의 소유. 드디어 세계 챔피온 타이틀 매치가 벌어지는 밤, '사상 최대의 작전'은 시작된다.",
+            "poster_path": "/A4R6u7SidBPVXMVzGSysCiRGTRz.jpg",
+            "backdrop_path": "/4svggv4gfe6vHsrGpaRMzrXLozt.jpg",
+            "genre_ids": [
+                18,
+                36,
+                10752,
+                28
+            ]
+        }
+    },
+    {
         "pk": 2024,
         "model": "movies.movie",
         "fields": {

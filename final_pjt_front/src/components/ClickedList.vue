@@ -68,15 +68,16 @@ export default {
 
           console.log("영화 디테일");
           console.log(this.movie_detail);
-
           // 영화가 데이터베이스에 존재하는지 확인합니다.
           this.checkIfMovieExists(movie_id)
             .then((exists) => {
               if (!exists) {
                 // 영화가 데이터베이스에 존재하지 않는 경우, 데이터베이스에 추가합니다.
+                console.log("영화없음");
                 this.addMovieToDatabase(movie_id);
               } else {
                 // 영화가 이미 존재하는 경우, 상세 보기로 이동합니다.
+                console.log("영화 존재");
                 this.navigateToDetail(movie_id);
               }
             })
@@ -170,7 +171,8 @@ export default {
         .then((response) => {
           const movieData = response.data;
           console.log("영화 데이터:", movieData);
-          return movieData !== null; // 영화가 존재하는 경우 true를 반환하고, 그렇지 않은 경우 false를 반환합니다.
+          console.log(movieData !== null);
+          return movieData.exists; // 영화가 존재하는 경우 true를 반환하고, 그렇지 않은 경우 false를 반환합니다.
         })
         .catch((error) => {
           console.error("영화 존재 여부 확인 중 오류가 발생했습니다:", error);
@@ -181,10 +183,20 @@ export default {
       const API_URL = `http://127.0.0.1:8000/api/v1/movies/`;
 
       const movieData = {
-        movie_id: movie_id,
+        movie_id: this.movie_detail.id,
+        overview: this.movie_detail.overview,
+        popularity: this.movie_detail.popularity,
+        poster_path: this.movie_detail.poster_path,
+        backdrop_path: this.movie_detail.backdrop_path,
+        release_date: this.movie_detail.release_date,
+        title: this.movie_detail.title,
+        vote_average: this.movie_detail.vote_average,
+        vote_count: this.movie_detail.vote_count,
+        genre_ids: this.movie_detail.genres,
         // 필요한 다른 영화 정보도 추가할 수 있습니다.
       };
-
+      console.log("확인", this.movie_detail);
+      console.log("내부", movieData);
       axios
         .post(API_URL, movieData)
         .then(() => {
@@ -197,7 +209,21 @@ export default {
     },
     navigateToDetail(movie_id) {
       // 영화의 상세 보기(detail view)로 이동합니다.
-      this.$router.push({ name: "DetailView", params: { id: movie_id } });
+      const API_URL = `http://127.0.0.1:8000/api/v1/movies/${movie_id}/make/`;
+
+      return axios
+        .get(API_URL)
+        .then((response) => {
+          const movieData = response.data;
+          console.log("최종", movieData);
+          this.$router.push({
+            name: "DetailView",
+            params: movieData,
+          });
+        })
+        .catch((error) => {
+          console.error("최종오류", error);
+        });
     },
   },
 };

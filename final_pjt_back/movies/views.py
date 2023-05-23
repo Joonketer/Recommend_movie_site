@@ -15,6 +15,7 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 from .serializers import MovieListSerializer, MovieSerializer, ReviewListSerializer, ReviewSerializer, PhotoSerializer
 from django.http import JsonResponse
 from django.db.models import Q
+
 # Create your views here.
 
 # 영화 존재 여부
@@ -22,7 +23,9 @@ from django.db.models import Q
 
 def check_if_movie_exists(request, movie_id):
     try:
-        movie = Movie.objects.get(id=movie_id)
+        movie = Movie.objects.get(
+            movie_id=movie_id)
+        print(movie)
         exists = True
     except Movie.DoesNotExist:
         exists = False
@@ -42,11 +45,29 @@ def movie_list(request):
         # print(serializer.data)
         return Response(serializer.data)
     elif request.method == 'POST':
+        print(request.data)
         serializer = MovieSerializer(data=request.data)
+        # 중복된 데이터 체크
         if serializer.is_valid(raise_exception=True):
+            title = serializer.validated_data['title']
+            existing_movies = Movie.objects.filter(title=title)
+            if existing_movies.exists():
+                return Response({'error': '영화가 이미 존재합니다.'}, status=status.HTTP_400_BAD_REQUEST)
+
             serializer.save()
             # serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET'])
+def get(request, movie_id):
+    try:
+        movie = Movie.objects.filter(
+            movie_id=movie_id).order_by('-release_date').first()
+        serializer = MovieSerializer(movie)
+        return Response(serializer.data)
+    except Movie.DoesNotExist:
+        return Response({"error": "Movie not found"}, status=404)
 
 # 영화 상세
 
