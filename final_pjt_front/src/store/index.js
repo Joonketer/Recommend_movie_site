@@ -15,13 +15,21 @@ export default new Vuex.Store({
     createPersistedState(),
   ],
   state: {
-    articles: [
-    ],
+    articles: [],
     photos: [],
-
     token: null,
     username: null,
     user_pk: null,
+    userinfo: null,
+    popularMovies: [],
+    popularPage: 1,
+    topRatedMovies: [],
+    topRatedPage: 1,
+    movies: [],
+    page: 1,
+    itemsperpage: 10,
+    topRatedStartIndex: 50,
+    likedMovies: [],
   },
   getters: {
     isLogin(state) {
@@ -30,6 +38,7 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+
     GET_ARTICLES(state, articles) {
       state.articles = articles
     },
@@ -42,12 +51,95 @@ export default new Vuex.Store({
 
       router.push({ name: 'ArticleView' }) // store/index.js $router 접근 불가 -> import를 해야함
     },
-    SAVE_USRE_INFO(state, info) {
-      state.username = info.username
-      state.user_pk = info.pk
-    }
+    SAVE_USER_INFO(state, info) {
+      state.userinfo = info;
+      // state.username = info.username;
+    },
+    SET_ALL_MOVIES(state, movies) {
+      state.movies = movies;
+    },
+    SET_POPULAR_MOVIES(state) {
+      const start = (state.popularPage - 1) * 5;
+
+      state.popularMovies = state.movies.sort((a, b) => b.popularity - a.popularity).slice(start, start + 5)
+      // state.popularMovies = movies.slice(0,5)
+    },
+    SET_TOP_RATED_MOVIES(state) {
+      // const start = (state.topRatedPage - 1) * 5;
+      const start = state.topRatedStartIndex;
+      const end = start + 5
+      state.topRatedMovies = state.movies.sort((a, b) => b.vote_average - a.vote_average).slice(start, end);
+      // state.topRatedMovies = state.movies.sort((a,b) => b.vote_average - a.vote_average).slice(start,start+5);
+      // state.topRatedMovies = movies.slice(0,5)
+    },
+    INCREMENT_POPULAR_PAGE(state) {
+      state.popularPage += 1;
+    },
+    DECREMENT_POPULAR_PAGE(state) {
+      if (state.popularPage > 1) {
+        state.popularPage -= 1;
+      }
+    },
+    INCREMENT_TOP_RATED_PAGE(state) {
+      state.topRatedPage += 1;
+    },
+    DECREMENT_TOP_RATED_PAGE(state) {
+      if (state.topRatedPage > 1) {
+        state.topRatedPage -= 1;
+      }
+    },
   },
   actions: {
+
+    nextPopularPage(context) {
+      context.commit('INCREMENT_POPULAR_PAGE');
+      context.dispatch('getMovies');
+    },
+    previousPopularPage(context) {
+      context.commit('DECREMENT_POPULAR_PAGE');
+      context.dispatch('getMovies');
+    },
+    nextTopRatedPage(context) {
+      context.commit('INCREMENT_TOP_RATED_PAGE');
+      context.dispatch('getMovies');
+    },
+    previousTopRatedPage(context) {
+      context.commit('DECREMENT_TOP_RATED_PAGE');
+      context.dispatch('getMovies');
+    },
+    getMovies(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/movies/`,
+      })
+        .then((res) => {
+
+          const movies = Array.isArray(res.data) ? res.data : [];
+          context.commit('SET_ALL_MOVIES', movies)
+          context.commit('SET_POPULAR_MOVIES');
+          context.commit('SET_TOP_RATED_MOVIES');
+          context.commit('RESET_PAGE');
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getMyProfile(context) {
+      console.log('이름', context.state.userinfo.username)
+      axios({
+        method: 'get',
+        url: `${API_URL}/profile/${context.state.userinfo.username}/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        }
+      })
+        .then((res) => {
+          console.log('유저', res)
+          context.commit('SAVE_USER_INFO', res.data)
+          // res.data 인지 확인 하기, userprofile 만들기
+          // action만들고, action커밋하고, 
+        })
+    },
     getPhotos(context) {
       axios({
         method: 'get',
@@ -110,7 +202,12 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('SAVE_TOKEN', res.data.key)
+          context.dispatch('saveUserInfo', res.data.key);
         })
+    },
+    logout(context) {
+      context.commit('SAVE_TOKEN', null);
+      // context.commit('SAVE_USER_INFO', { username: null, pk: null });
     },
     saveUserInfo(context, payload) {
       axios({
@@ -121,8 +218,8 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          console.log(res.data)
-          context.commit('SAVE_USRE_INFO', res.data)
+          console.log('유저프로픽', res.data)
+          context.commit('SAVE_USER_INFO', res.data)
         })
     },
     // fetchCurrentUser(context) {

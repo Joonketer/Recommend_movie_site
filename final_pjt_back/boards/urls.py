@@ -23,9 +23,14 @@ urlpatterns = [
     path("boards/", views.index, name="board_list"),    # 전체 게시글
     path("boards/<int:board_pk>/", views.board_detail,
          name="board_detail"),    # 단일 게시글 조회, 삭제, 수정
+    path('boards/<int:board_pk>/like/', views.board_like),  # 게시글 좋아요
+
+
     path("comments/", views.comment_list, name="comment_list"),  # 전체 댓글
     path("comments/<int:board_pk>/comments/",
          views.comment_create, name="comment_create"),  # 댓글 생성
     path("comments/<int:comment_pk>/",
          views.comment_detail, name="comment_detail"),  # 단일 댓글 조회, 삭제, 수정
+    path('comments/<int:comment_pk>/like/', views.comment_like),  # 댓글 좋아요
+
 ]

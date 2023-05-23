@@ -36,7 +36,19 @@
       <button type="submit">리뷰 작성</button>
     </form>
     <hr />
-
+    <p>예고편:</p>
+    <div v-if="trailerId">
+      <iframe
+        :src="'https://www.youtube.com/embed/' + trailerId"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div v-else>
+      <p>예고편이 없습니다.</p>
+    </div>
+    <hr />
     <!-- 작성된 리뷰 목록 -->
     <div v-if="article.reviews && article.reviews.length > 0">
       <h2>리뷰 목록</h2>
@@ -75,6 +87,7 @@ export default {
       user_vote_average: 1,
       currentUser: "", // 현재 로그인된 사용자 이름
       user_id: null,
+      trailerId: "",
     };
   },
   computed: {
@@ -85,6 +98,26 @@ export default {
     this.getArticleDetail();
   },
   methods: {
+    fetchTrailer() {
+      const YOUTUBEAPIKEY = "AIzaSyBynVLUf5yjYB01BF3oODlyJeEKhOcKKiQ"; // replace with your YouTube API key
+      const movieTitle = this.article.title; // replace with the actual movie title
+      if (movieTitle === undefined) {
+        console.log("제목없음");
+        return;
+      }
+      const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${movieTitle}+trailer&type=video&key=${YOUTUBEAPIKEY}`;
+      axios
+        .get(searchUrl)
+        .then((res) => {
+          console.log(res);
+          if (res.data.items.length > 0) {
+            this.trailerId = res.data.items[0].id.videoId;
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching YouTube video", err);
+        });
+    },
     likeReview(reviewId) {
       axios({
         method: "post",
@@ -104,7 +137,8 @@ export default {
         url: `${API_URL}/api/v1/movies/${movieId}/like/`,
         headers: { Authorization: `Token ${this.token}` },
       })
-        .then(() => {
+        .then((res) => {
+          console.log(res);
           this.getArticleDetail();
         })
         .catch((err) => {
@@ -119,6 +153,7 @@ export default {
         .then((res) => {
           console.log(res);
           this.article = res.data;
+          this.fetchTrailer();
         })
         .catch((err) => {
           console.log(err);

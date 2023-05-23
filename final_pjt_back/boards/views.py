@@ -18,7 +18,7 @@ from .serializers import BoardListSerializer, BoardSerializer, CommentListSerial
 def index(reqeust):
     # 모든 게시글
     if reqeust.method == 'GET':
-        boards = Board.objects.all()
+        boards = Board.objects.all().order_by('-created_at')
         serializer = BoardListSerializer(boards, many=True)
         return Response(serializer.data)
     # 게시글 생성
@@ -66,7 +66,7 @@ def comment_create(reqeust, board_pk):
 
     # 댓글 작성
 
-    serializer = CommenntSerializer(data=reqeust.data)
+    serializer = CommentSerializer(data=reqeust.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(board=board, user=reqeust.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -89,3 +89,34 @@ def comment_detail(request, comment_pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
+# 댓글 좋아요
+
+
+@api_view(['POST'])
+def comment_like(request, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    # 좋아요 했었다면
+    if comment.like_users.filter(pk=request.user.pk).exists():
+        # 좋아요 제거
+        comment.like_users.remove(request.user)
+    else:
+        # 좋아요 추가
+        comment.like_users.add(request.user)
+    serializer = CommentSerializer(comment)
+    return Response(serializer.data)
+
+
+# 게시글 좋아요
+
+@api_view(['POST'])
+def board_like(request, board_pk):
+    board = Board.objects.get(pk=board_pk)
+    # 좋아요 했었다면
+    if board.like_users.filter(pk=request.user.pk).exists():
+        # 좋아요 제거
+        board.like_users.remove(request.user)
+    else:
+        # 좋아요 추가
+        board.like_users.add(request.user)
+    serializer = BoardSerializer(board)
+    return Response(serializer.data)

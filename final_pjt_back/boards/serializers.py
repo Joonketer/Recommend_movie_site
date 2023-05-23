@@ -29,7 +29,8 @@ class BoardSerializer(serializers.ModelSerializer):
 
         class Meta:
             model = Comment
-            fields = ('id', 'user', 'content', 'created_at', 'updated_at')
+            fields = ('id', 'user', 'content', 'created_at',
+                      'updated_at', 'like_users')
     comments = CommentSerializer(many=True, read_only=True)
     user = UserSerializer(read_only=True)
     like_users = UserSerializer(read_only=True, many=True)
@@ -58,6 +59,7 @@ class CommentSerializer(serializers.ModelSerializer):
             fields = ('id', 'title', )
     board = BoardSerializer(read_only=True)
     user = UserSerializer(read_only=True)
+    like_users = UserSerializer(read_only=True, many=True)
 
     class Meta:
         model = Comment
