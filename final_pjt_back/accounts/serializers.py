@@ -18,7 +18,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         class Meta:
             model = Comment
             # 댓글 번호, 게시글, 내용
-            fields = ('id', 'board' 'content')
+            fields = ('id', 'board', 'content')
     like_comments = CommentSerializer(many=True)
     comments = CommentSerializer(many=True)
 

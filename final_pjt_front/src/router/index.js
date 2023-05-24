@@ -10,10 +10,12 @@ import LogInView from '@/views/LogInView'
 import RecommendView from '@/views/RecommendView'
 import SearchView from '@/views/SearchView'
 import ProfileView from '@/views/ProfileView'
+import OtherProfileView from '@/views/OtherProfileView'
 import BoxOfficeView from '@/views/BoxOfficeView'
 import TagSearchView from '@/views/TagSearchView'
 import CommunityView from '@/views/CommunityView'
 import CommunityArticleDetailView from '@/views/CommunityArticleDetailView.vue'
+import CommunityArticleUpdateView from '@/views/CommunityArticleUpdateView.vue'
 
 Vue.use(VueRouter)
 
@@ -81,9 +83,16 @@ const routes = [
   },
 
   {
-    path: '/proflie/me',
+    path: '/profile/me',
     name: 'ProfileView',
     component: ProfileView,
+    props: true
+  },
+  {
+    path: '/profile/:username',
+    name: 'OtherProfileView',
+    component: OtherProfileView,
+    props: true
   },
 
   {
@@ -96,6 +105,14 @@ const routes = [
     path: '/community/boards/:id',
     name: 'CommunityArticleDetailView',
     component: CommunityArticleDetailView,
+    props: true
+  },
+
+
+  {
+    path: '/community/boards/update/:id',
+    name: 'CommunityArticleUpdateView',
+    component: CommunityArticleUpdateView,
     props: true
   },
 

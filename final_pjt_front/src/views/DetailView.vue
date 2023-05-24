@@ -8,7 +8,10 @@
     <p>장르: {{ article?.genre_ids }}</p>
     <p>
       포스터:
-      <img :src="getBackdropUrl(article?.poster_path)" alt="Backdrop Image" />
+      <img
+        :src="getBackdropUrl(article?.poster_path || article?.backdrop_path)"
+        alt="Backdrop Image"
+      />
     </p>
     <!-- 영화 좋아요 버튼 -->
     <button @click="likeMovie(article.id)">
@@ -91,13 +94,28 @@ export default {
     };
   },
   computed: {
+    isLogin() {
+      return this.$store.getters.isLogin; // 로그인 여부
+    },
     ...mapState(["token"]),
   },
   created() {
+    this.getArticles();
     this.getCurrentUser(); // 현재 로그인된 사용자 정보를 가져오는 메소드 호출
     this.getArticleDetail();
   },
   methods: {
+    getArticles() {
+      if (this.isLogin) {
+        this.$store.dispatch("getArticles");
+      } else {
+        alert("로그인이 필요한 페이지입니다...");
+        this.$router.push({ name: "LogInView" });
+      }
+
+      // 로그인이 되어 있으면 getArticles action 실행
+      // 로그인 X라면 login 페이지로 이동
+    },
     fetchTrailer() {
       const YOUTUBEAPIKEY = "AIzaSyBynVLUf5yjYB01BF3oODlyJeEKhOcKKiQ"; // replace with your YouTube API key
       const movieTitle = this.article.title; // replace with the actual movie title

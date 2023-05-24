@@ -19,6 +19,8 @@ from . import views
 
 app_name = 'profile'
 urlpatterns = [
-    path('<str:username>/', views.profile_follow, name="profile_follow"),
+    path('<str:username>/follow/', views.profile_follow, name="profile_follow"),
+    path('check/<str:username>/', views.profile_view, name='profile'),
+    path('<str:username>/', views.profile_follow, name='getprofile'),
 
 ]

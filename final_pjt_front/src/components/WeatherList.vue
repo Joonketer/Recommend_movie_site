@@ -3,21 +3,24 @@
     <h3>날씨 api</h3>
     <h2>Current Weather: {{ weather }}</h2>
     <h3>Suggested Movie Genres:</h3>
-    <div v-if="isLoading">
-      Loading...
-    </div>
+    <div v-if="isLoading">Loading...</div>
     <div v-else>
       <div v-for="genre in movieGenres" :key="genre.id">
         <h2>{{ genre.name }}</h2>
         <p v-for="movie in recommendedMovies[genre.id]" :key="movie.movie_id">
           {{ movie.title }}
           <router-link
-      :to="{
-        name: 'DetailView',
-        params: { id: movie.movie_id },
-      }" >
-        <img :src="getBackdropUrl(movie.poster_path)" alt="Backdrop Image" />
-        </router-link>
+            :to="{
+              name: 'DetailView',
+              params: { id: movie.movie_id },
+            }"
+          >
+            <img
+              :src="getBackdropUrl(movie.poster_path || movie.backdrop_path)"
+              alt="Backdrop Image"
+              @click="handleMovieClick(movie)"
+            />
+          </router-link>
         </p>
       </div>
     </div>
@@ -41,6 +44,28 @@ export default {
     this.fetchWeather();
   },
   methods: {
+    handleMovieClick(article) {
+      const payload = {
+        movie: article.movie_id,
+        genre_ids: article.genre_ids.map((genre) => genre.genre_id),
+      };
+
+      // 서버로 영화 클릭 정보 전송
+      axios
+        .post("http://127.0.0.1:8000/api/v1/recent_moives/", payload, {
+          headers: {
+            Authorization: `Token ${this.token}`,
+          },
+        })
+        .then((response) => {
+          // 처리 성공 시 로직
+          console.log(response.data);
+        })
+        .catch((error) => {
+          // 에러 처리 로직
+          console.error(error);
+        });
+    },
     fetchWeather() {
       // Make an API request to OpenWeatherMap to get the current weather
       const API_KEY = "da84d14f5b0aa15df43c26b699b795bf";
@@ -62,21 +87,21 @@ export default {
     fetchMovieGenres(weather) {
       // Define movie genres based on weather conditions
       const genreMap = {
-        Clear: [28, 12, 16, 99, 10751,35,878],
-        Clouds: [18, 14, 36, 10752,9648,53],
-        Rain: [80, 18, 10749, 10402,53],
-        Snow: [28, 16, 10751, 10770,35,18],
-        Thunderstorm: [28, 27, 878,99],
-        Drizzle: [18, 35, 9648, 10402,16],
-        Mist: [53, 27, 9648,80,10770],
-        Smoke: [53, 27, 9648,80,10770],
-        Haze: [28, 18, 10749,9648,53],
-        Dust: [28, 18, 9648,53],
-        Fog: [18, 27, 53,9648,80],
-        Sand: [28, 18, 9648, 37,878],
-        Ash: [53, 27, 9648,80,10770],
-        Squall: [80, 18, 10749, 10402,53],
-        Tornado: [28, 878, 53,10752],
+        Clear: [28, 12, 16, 99, 10751, 35, 878],
+        Clouds: [18, 14, 36, 10752, 9648, 53],
+        Rain: [80, 18, 10749, 10402, 53],
+        Snow: [28, 16, 10751, 10770, 35, 18],
+        Thunderstorm: [28, 27, 878, 99],
+        Drizzle: [18, 35, 9648, 10402, 16],
+        Mist: [53, 27, 9648, 80, 10770],
+        Smoke: [53, 27, 9648, 80, 10770],
+        Haze: [28, 18, 10749, 9648, 53],
+        Dust: [28, 18, 9648, 53],
+        Fog: [18, 27, 53, 9648, 80],
+        Sand: [28, 18, 9648, 37, 878],
+        Ash: [53, 27, 9648, 80, 10770],
+        Squall: [80, 18, 10749, 10402, 53],
+        Tornado: [28, 878, 53, 10752],
       };
 
       // Fetch movie genres based on the weather condition
@@ -115,11 +140,10 @@ export default {
     getMovieIdsByGenreId(genreId) {
       // Make an API request to fetch movie IDs by genre ID
       const API_URL = `http://127.0.0.1:8000/api/v1/movies/${genreId}/genre/`;
-      
 
       return axios.get(API_URL).then((response) => {
         const movies = response.data;
-        console.log(movies)
+        console.log(movies);
         return movies.map((movie) => {
           return {
             movie_id: movie.movie_id,
@@ -175,7 +199,7 @@ export default {
 ul {
   margin-left: 1rem;
 }
-img{
+img {
   width: 100px;
   height: 100px;
 }

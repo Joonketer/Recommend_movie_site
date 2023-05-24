@@ -7,14 +7,14 @@
         {{ movie.id }}
         <div v-if="movie_detail">
           <img
-            :src="getBackdropUrl(movie.poster_path)"
+            :src="getBackdropUrl(movie.poster_path || movie.backdrop_path)"
             alt="Backdrop Image"
             @click="checkMovieExistence(movie)"
           />
         </div>
         <div v-else>
           <img
-            :src="getBackdropUrl(movie.poster_path)"
+            :src="getBackdropUrl(movie.poster_path || movie.backdrop_path)"
             alt="Backdrop Image"
             @click="checkMovieExistence(movie)"
           />
@@ -36,6 +36,9 @@ export default {
       movie_detail: null,
     };
   },
+  created() {
+    this.getArticles();
+  },
   props: {
     searchQuery: {
       type: String,
@@ -43,6 +46,9 @@ export default {
     },
   },
   computed: {
+    isLogin() {
+      return this.$store.getters.isLogin; // 로그인 여부
+    },
     ...mapState(["token"]),
     filteredSearchResults() {
       return this.searchResults.filter((movie) =>
@@ -63,6 +69,17 @@ export default {
     },
   },
   methods: {
+    getArticles() {
+      if (this.isLogin) {
+        this.$store.dispatch("getArticles");
+      } else {
+        alert("로그인이 필요한 페이지입니다...");
+        this.$router.push({ name: "LogInView" });
+      }
+
+      // 로그인이 되어 있으면 getArticles action 실행
+      // 로그인 X라면 login 페이지로 이동
+    },
     searchMovies() {
       const url = `https://api.themoviedb.org/3/search/movie?query=${this.searchQuery}&include_adult=false&language=ko-KOR&page=1`;
 

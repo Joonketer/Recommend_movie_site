@@ -1,13 +1,29 @@
 <template>
   <div v-if="board">
+    <!-- <h2>지금 로그인된 사람{{ this.currentUser.username }}</h2> -->
     <h1>{{ board.title }}</h1>
     <p>{{ board.content }}</p>
     <p>작성자: {{ board.user.username }}</p>
     <p>작성일: {{ new Date(board.created_at).toLocaleDateString() }}</p>
     <p>수정일: {{ new Date(board.updated_at).toLocaleDateString() }}</p>
     <p>게시글 유형: {{ board.board_type === 0 ? "Talk" : "comment" }}</p>
-    <router-link to="/community">Back to Community</router-link>
-    <button @click="likeBoard(board.id)">
+    <router-link to="/community">Back to Community</router-link><br />
+    <router-link
+      v-if="isCurrentUser(board.user.username)"
+      :to="{ name: 'CommunityArticleUpdateView' }"
+      >수정</router-link
+    >
+    <button
+      v-if="isCurrentUser(board.user.username)"
+      @click="deleteBoard(board.id)"
+    >
+      삭제
+    </button>
+
+    <button
+      v-if="!isCurrentUser(board.user.username)"
+      @click="likeBoard(board.id)"
+    >
       좋아요
       {{
         (Array.isArray(board?.like_users) && board?.like_users.length) || 0
@@ -31,7 +47,10 @@
         <li v-for="comment in board.comments" :key="comment.id">
           {{ comment.content }} - 작성자:
           {{ comment.user }}
-          <button @click="likecomment(comment.id)">
+          <button
+            v-if="!isCurrentUser(comment.user.username)"
+            @click="likecomment(comment.id)"
+          >
             좋아요
             {{
               (Array.isArray(comment?.like_users) &&
@@ -64,12 +83,39 @@ export default {
   },
   computed: {
     ...mapState(["token"]),
+    isLogin() {
+      return this.$store.getters.isLogin; // 로그인 여부
+    },
   },
   async created() {
+    this.getArticles();
     this.getCurrentUser();
     await this.getBoardDetail();
   },
   methods: {
+    deleteBoard(boardId) {
+      axios
+        .delete(`${API_URL}/${boardId}/`, {
+          headers: { Authorization: `Token ${this.token}` },
+        })
+        .then(() => {
+          this.$router.push({ name: "CommunityView" }); // 삭제 후 커뮤니티 페이지로 이동
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getArticles() {
+      if (this.isLogin) {
+        this.$store.dispatch("getArticles");
+      } else {
+        alert("로그인이 필요한 페이지입니다...");
+        this.$router.push({ name: "LogInView" });
+      }
+
+      // 로그인이 되어 있으면 getArticles action 실행
+      // 로그인 X라면 login 페이지로 이동
+    },
     getCurrentUser() {
       // 현재 로그인된 사용자 정보를 가져오는 API 호출
       axios({
@@ -80,7 +126,7 @@ export default {
         .then((res) => {
           console.log("로그인");
           console.log(res);
-          this.currentUser = res.data.username; // 사용자 이름을 데이터에 저장
+          this.currentUser = res.data; // 사용자 정보 전체를 저장
           this.user_id = res.data.pk;
 
           // 사용자 정보를 가져온 후에 리뷰를 가져오는 메소드 호출
@@ -152,6 +198,9 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    isCurrentUser(userId) {
+      return this.currentUser && this.currentUser.username === userId;
     },
   },
 };

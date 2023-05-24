@@ -58,7 +58,13 @@ export default {
       Communityarticles: [],
     };
   },
+  computed: {
+    isLogin() {
+      return this.$store.getters.isLogin; // 로그인 여부
+    },
+  },
   created() {
+    this.getArticles();
     axios({
       method: "get",
       url: `${API_URL}/api/v1/community/boards/`,
@@ -70,17 +76,21 @@ export default {
         console.log(err);
       });
   },
-  // computed: {
-  //     ...mapGetters(['isLogin']),
-  // },
-  // beforeCreate(){
-  //     if(!this.isLogin){
-  //         this.$router.push({name: 'LogInView' });
-  //     }
-  // },
+  methods: {
+    getArticles() {
+      if (this.isLogin) {
+        this.$store.dispatch("getArticles");
+      } else {
+        alert("로그인이 필요한 페이지입니다...");
+        this.$router.push({ name: "LogInView" });
+      }
+
+      // 로그인이 되어 있으면 getArticles action 실행
+      // 로그인 X라면 login 페이지로 이동
+    },
+  },
 };
 </script>
 
 <style>
-/* 작성 시 에러코드 403 해결, 따로 연결하기, 작성글 id 발급하기 등등 해결할 게 많음 */
 </style>

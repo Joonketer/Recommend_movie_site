@@ -30,15 +30,38 @@ export default new Vuex.Store({
     itemsperpage: 10,
     topRatedStartIndex: 50,
     likedMovies: [],
+    following: null,
+    profileInfo: null,
   },
   getters: {
     isLogin(state) {
 
       return state.token ? true : false
-    }
+    },
+    profileInfo: state => state.profileInfo,
   },
   mutations: {
-
+    SET_LOGIN(state, isLogin) {
+      state.isLogin = isLogin;
+    },
+    SET_PROFILE_INFO(state, profileInfo) {
+      const updatedProfileInfo = {
+        ...profileInfo,
+        following: profileInfo.following // 초기값 설정
+      };
+      state.profileInfo = updatedProfileInfo;
+    },
+    SET_FOLLOWING(state, isFollowing) {
+      if (state.profileInfo) {
+        state.profileInfo.following = isFollowing;
+      }
+    },
+    CLEAR_TOKEN(state) {
+      state.token = null;
+    },
+    CLEAR_USER_INFO(state) {
+      state.userinfo = null;
+    },
     GET_ARTICLES(state, articles) {
       state.articles = articles
     },
@@ -49,7 +72,7 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, token) {
       state.token = token
 
-      router.push({ name: 'ArticleView' }) // store/index.js $router 접근 불가 -> import를 해야함
+      router.push('/'); // store/index.js $router 접근 불가 -> import를 해야함
     },
     SAVE_USER_INFO(state, info) {
       state.userinfo = info;
@@ -90,7 +113,62 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    getUserProfile({ commit }, username) {
+      // 사용자의 프로필 정보를 가져오기 위한 API 호출 코드를 여기에 작성합니다.
+      // 예시:
+      axios.get(`http://127.0.0.1:8000/profile/${username}/`)
+        .then(response => {
+          console.log('다른사람', response.data)
+          commit('SET_PROFILE_INFO', response.data);
+        })
+        .catch(error => {
+          console.error('사용자 프로필을 가져오는 중 오류가 발생했습니다:', error);
+        });
+    },
+    // 유저를 팔로우하는 액션
+    followUser({ commit, state }, username) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`${API_URL}/profile/${username}/follow/`, null, {
+            headers: {
+              Authorization: `Token ${state.token}`,
+            },
+          })
+          .then((response) => {
+            // 팔로우 성공 시
+            // 상태 변경 및 추가 작업 수행
+            commit('SET_FOLLOWING', true); // 팔로우 상태 변경
+            commit('SET_PROFILE_INFO', response.data); // 프로필 정보 업데이트
+            resolve(response.data);
+          })
+          .catch((error) => {
+            // 팔로우 실패 시
+            reject(error);
+          });
+      });
+    },
 
+    unfollowUser({ commit, state }, username) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`${API_URL}/profile/${username}/follow/`, null, {
+            headers: {
+              Authorization: `Token ${state.token}`,
+            },
+          })
+          .then((response) => {
+            // 팔로우 성공 시
+            // 상태 변경 및 추가 작업 수행
+            commit('SET_FOLLOWING', false); // 팔로우 상태 변경
+            commit('SET_PROFILE_INFO', response.data); // 프로필 정보 업데이트
+            resolve(response.data);
+          })
+          .catch((error) => {
+            // 언팔로우 실패 시
+            reject(error);
+          });
+      });
+    },
     nextPopularPage(context) {
       context.commit('INCREMENT_POPULAR_PAGE');
       context.dispatch('getMovies');
@@ -118,7 +196,6 @@ export default new Vuex.Store({
           context.commit('SET_ALL_MOVIES', movies)
           context.commit('SET_POPULAR_MOVIES');
           context.commit('SET_TOP_RATED_MOVIES');
-          context.commit('RESET_PAGE');
         })
         .catch((err) => {
           console.log(err)
@@ -174,12 +251,14 @@ export default new Vuex.Store({
       const username = payload.username
       const password1 = payload.password1
       const password2 = payload.password2
+      // const email = payload.email
 
+      console.log('인덱스', payload)
       axios({
         method: 'post',
         url: `${API_URL}/accounts/signup/`,
         data: {
-          username, password1, password2
+          username, password1, password2,
         }
       })
         .then((res) => {
@@ -203,6 +282,14 @@ export default new Vuex.Store({
         .then((res) => {
           context.commit('SAVE_TOKEN', res.data.key)
           context.dispatch('saveUserInfo', res.data.key);
+        })
+        .catch((err) => {
+          if (err.response && err.response.status === 400) {
+            // Display alert message for invalid credentials
+            alert('Invalid username or password. Please try again.')
+          } else {
+            console.log(err)
+          }
         })
     },
     logout(context) {
