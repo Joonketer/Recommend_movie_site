@@ -20,17 +20,20 @@
           v-for="movie in popularMovies"
           :key="movie.id"
           :img-src="getImageUrl(movie.poster_path)"
-        >
+          
+        >  
           <img
             slot="img"
             :src="getImageUrl(movie.poster_path)"
             alt="Movie poster"
-            class="carousel-image"
+            class="carousel-image movie-item"
+            @click="handleMovieClick(movie)"
           />
           <div slot="img-overlay" class="overlay">
             <h3>{{ movie.title }}</h3>
             <p>★ : {{ movie.vote_average }}</p>
           </div>
+          
         </b-carousel-slide>
       </b-carousel>
     </div>
@@ -56,7 +59,8 @@
             slot="img"
             :src="getImageUrl(movie.poster_path)"
             alt="Movie poster"
-            class="carousel-image"
+            class="carousel-image movie-item"
+            @click="handleMovieClick(movie)"
           />
           <div slot="img-overlay" class="overlay">
             <h3>{{ movie.title }}</h3>
@@ -154,4 +158,8 @@ export default {
   width: 100%;
   height:50%;
 }
+.movie-item {
+  cursor: pointer;
+}
+
 </style>
