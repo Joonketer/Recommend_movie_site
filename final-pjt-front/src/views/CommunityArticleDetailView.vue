@@ -44,11 +44,7 @@
               placeholder="댓글을 작성하세요"
             ></b-form-textarea>
             <p>작성자: {{ currentUser.username }}</p>
-<<<<<<< HEAD:final-pjt-front/src/views/CommunityArticleDetailView.vue
             <b-button type="submit">댓글 작성</b-button>
-=======
-            <b-button type="submit">리뷰 작성</b-button>
->>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/CommunityArticleDetailView.vue
           </b-form>
           <hr />
           <!-- 작성된 댓글 목록 -->

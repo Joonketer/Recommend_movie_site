@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD:final-pjt-front/src/views/OtherProfileView.vue
   <b-container fluid class="d-flex align-items-center justify-content-center vh-100 bg-#333 text-white">
     <b-card class="text-white bg-dark" style="width: 30rem;">
       <h1 class="text-center">{{ profileInfo && profileInfo.username }}님의 프로필</h1>
@@ -66,53 +65,11 @@
       </b-card-body>
     </b-card>
   </b-container>
-=======
-  <div class="profile">
-    <h1>{{ profileInfo.username }}님의 사용자 프로필</h1>
-    <button v-if="isLogin && !isFollowing" @click="followUser">팔로우</button>
-    <button v-if="isLogin && isFollowing" @click="unfollowUser">
-      언팔로우
-    </button>
-    <hr />
-
-    <p>
-      {{ profileInfo.username }}님의 팔로잉 수:
-      {{ profileInfo.followings.length }}명
-    </p>
-    <hr />
-    <p>
-      {{ profileInfo.username }}님의 팔로워 수:
-      {{ profileInfo.followers.length }}명
-    </p>
-    <hr />
-    <p>
-      {{ profileInfo.username }}님의 좋아요 수: {{ profileInfo.like_boards }}
-    </p>
-    <hr />
-    <p>{{ profileInfo.username }}님의 게시물 수: {{ profileInfo.boards }}</p>
-    <hr />
-    <p>
-      {{ profileInfo.username }}님의 좋아요 댓글 수:
-      {{ profileInfo.like_comments }}
-    </p>
-    <hr />
-    <p>{{ profileInfo.username }}님의 댓글 수: {{ profileInfo.comments }}</p>
-    <hr />
-    <p>
-      {{ profileInfo.username }}님의 좋아요 영화 수:
-      {{ profileInfo.like_movies }}
-    </p>
-  </div>
->>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/OtherProfileView.vue
 </template>
 
 <script>
 import { mapState } from "vuex";
-<<<<<<< HEAD:final-pjt-front/src/views/OtherProfileView.vue
 import axios from "axios";
-=======
-
->>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/OtherProfileView.vue
 export default {
   props: {
     username: {
@@ -133,7 +90,6 @@ export default {
     this.$store.dispatch("getUserProfile", this.username);
   },
   methods: {
-<<<<<<< HEAD:final-pjt-front/src/views/OtherProfileView.vue
     checkMovieExistence(movie) {
       const movieId = movie.id;
       const API_URL = `http://127.0.0.1:8000/api/v1/movies/${movieId}/exists/`;
@@ -215,8 +171,6 @@ export default {
           });
       }
     },
-=======
->>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/OtherProfileView.vue
     followUser() {
       this.$store
         .dispatch("followUser", this.username)
@@ -243,13 +197,8 @@ export default {
 };
 </script>
 
-<<<<<<< HEAD:final-pjt-front/src/views/OtherProfileView.vue
 <style scoped>
 .movie-item {
   cursor: pointer;
 }
 </style>
-=======
-<style>
-</style>
->>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/OtherProfileView.vue

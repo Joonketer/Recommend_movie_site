@@ -21,11 +21,7 @@
           v-if="movie.showDetails"
           @click="checkMovieExistence(movie)"
         >
-<<<<<<< HEAD:final-pjt-front/src/views/SearchView.vue
           <h5>{{ movie.title }}</h5>
-=======
-          <h3>{{ movie.title }}</h3>
->>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/SearchView.vue
           <p>★ : {{ movie.vote_average }}</p>
         </div>
       </div>

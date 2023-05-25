@@ -1,4 +1,3 @@
-<<<<<<< HEAD:final-pjt-front/src/views/ProfileView.vue
 
 <template>
   <b-container fluid class="d-flex align-items-center justify-content-center vh-100 bg-#333 text-white">
@@ -71,43 +70,6 @@
       </b-card-body>
     </b-card>
   </b-container>
-=======
-<template>
-  <div class="profile">
-    <h1>{{ userinfo.username }}님의 사용자 프로필</h1>
-    <hr />
-    <p>{{ userinfo.username }}님의 팔로잉: {{ userinfo.followings.length }}</p>
-    <hr />
-    <p>{{ userinfo.username }}님의 팔로워: {{ userinfo.followers.length }}</p>
-    <hr />
-    <p>{{ userinfo.username }}님의 좋아요 수: {{ userinfo.like_boards }}</p>
-    <hr />
-    <p>{{ userinfo.username }}님의 게시물 수: {{ userinfo.boards }}</p>
-    <hr />
-    <p>
-      {{ userinfo.username }}님의 좋아요 댓글 수: {{ userinfo.like_comments }}
-    </p>
-    <hr />
-    <p>{{ userinfo.username }}님의 댓글 수: {{ userinfo.comments }}</p>
-    <hr />
-    <div>
-      {{ userinfo.username }}님의 좋아요 영화 수:
-      <div v-for="movie in userinfo.like_movies" :key="movie.id">
-        <span @click="checkMovieExistence(movie)">{{ movie.title }},</span>
-      </div>
-    </div>
-    <div>
-      <h1>가입된 사용자 목록</h1>
-      <ul>
-        <li v-for="user in randomUsers" :key="user.id">
-          <router-link :to="`/profile/${user.username}`">{{
-            user.username
-          }}</router-link>
-        </li>
-      </ul>
-    </div>
-  </div>
->>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/ProfileView.vue
 </template>
 
 <script>
@@ -139,11 +101,7 @@ export default {
     },
   },
   created() {
-<<<<<<< HEAD:final-pjt-front/src/views/ProfileView.vue
     if (this.isLogin && this.userinfo) {
-=======
-    if (this.isLogin) {
->>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/ProfileView.vue
       this.$store.dispatch("getMyProfile");
       this.fetchUsers();
       this.getArticles();
@@ -255,7 +213,6 @@ export default {
           console.error(error);
         });
     },
-<<<<<<< HEAD:final-pjt-front/src/views/ProfileView.vue
     handleMovieClick(movie) {
       if (!this.isLogin) {
         this.$router.push({ name: "Login" });
@@ -283,18 +240,12 @@ export default {
           console.error(error);
         });
     },
-=======
->>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/ProfileView.vue
   },
 };
 </script>
 
-<<<<<<< HEAD:final-pjt-front/src/views/ProfileView.vue
 <style scoped>
 .movie-item {
   cursor: pointer;
 }
-=======
-<style>
->>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/ProfileView.vue
 </style>

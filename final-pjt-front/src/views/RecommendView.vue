@@ -1,13 +1,9 @@
 <template>
   <div>
-<<<<<<< HEAD:final-pjt-front/src/views/RecommendView.vue
     <div class="d-flex align-items-center justify-content-center bg-#333 text-white">
     <h1>추천영화</h1>
   </div>
    <hr>
-=======
-    <h1>영화 추천 페이지</h1>
->>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/RecommendView.vue
     <RecommendList />
     <hr>
     <ClickedList />
