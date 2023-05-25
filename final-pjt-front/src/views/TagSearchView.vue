@@ -29,7 +29,12 @@
       variant="dark"
       text-variant="secondary"
       @click="searchMovies"
+<<<<<<< HEAD:final-pjt-front/src/views/TagSearchView.vue
       :disabled="selectedGenres.length === 0">
+=======
+      :disabled="selectedGenres.length === 0"
+    >
+>>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/TagSearchView.vue
       Search Movies
     </b-button>
     <div class="movies d-flex flex-wrap justify-content-around">

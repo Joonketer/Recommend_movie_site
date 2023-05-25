@@ -1,5 +1,10 @@
 <template>
   <div>
+<<<<<<< HEAD:final-pjt-front/src/views/HomeView.vue
+=======
+    <h1>home page</h1>
+    <br />
+>>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/HomeView.vue
     <MovieList />
   </div>
 </template>

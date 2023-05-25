@@ -2,6 +2,41 @@
 
 [CINEMAYO](https://www.notion.so/d3eb72ae06a544d9b988c80bb9806d50)
 
+<<<<<<< HEAD
+=======
+|  |  | 16(화) | 17(수) | 18(목) | 19(금) | 20(토) |
+| --- | --- | --- | --- | --- | --- | --- |
+|  | 
+
+ | 프로젝트 구성
+목업 작성 | Back-end 기본 구조 생성
+Movies models, serializers 작성 
+Movie_JSON 파일 구성 | Movies views, accounts 구조 작성
+ERD 초안 작성 | Recommend 알고리즘 작성
+follow 기능 구현시작 | Recommend 알고리즘 작성
+Boards 구성 시작
+ |
+| 21(일) | 22(월) | 23(화) | 24(수) | 25(목) | 26(금) |  |
+| Recommend 알고리즘 완료
+Recommend_Movie front_end 구현 시작
+follow 기능 구현 완료 | Review 기능 수정 및 완료
+Movie_likes, Review_likes 구현
+Recommend_Movie Vue 구현 완료
+Search back & front 구현 완료
+Movie_Detail back & front Editing, Debugging
+
+ | back_end & fornt_end 병합
+Debugging
+Board 구현 완료
+ | back & front Debugging
+
+ | Debugging 완료
+JSON 수정
+README 작성
+발표자료 작성
+ |  | 
+
+>>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49
 
 
 ## 프로젝트 기간

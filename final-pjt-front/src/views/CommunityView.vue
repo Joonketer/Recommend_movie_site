@@ -8,7 +8,11 @@
     <table>
       <thead>
         <tr>
+<<<<<<< HEAD:final-pjt-front/src/views/CommunityView.vue
           <th>게시글 번호</th> 
+=======
+          <th>ID</th> 
+>>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/CommunityView.vue
           <th>작성자</th> 
           <th>Title</th> 
           <th>Board Type</th> 
@@ -21,17 +25,29 @@
           v-for="Communityarticle in Communityarticles"
           :key="Communityarticle.id"
         >
+<<<<<<< HEAD:final-pjt-front/src/views/CommunityView.vue
+=======
+          <td>{{ Communityarticle.id }}</td>
+          <td>{{ Communityarticle.user.username }}</td>
+          <td>
+>>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/CommunityView.vue
             <router-link
               :to="{
                 name: 'CommunityArticleDetailView',
                 params: { id: Communityarticle.id },
               }"
             >
+<<<<<<< HEAD:final-pjt-front/src/views/CommunityView.vue
             <td>{{ Communityarticle.id }}</td>
           <td>{{ Communityarticle.user.username }}</td>
             <td>{{ Communityarticle.title }}</td>
             </router-link>
           
+=======
+              {{ Communityarticle.title }}
+            </router-link>
+          </td>
+>>>>>>> 9faf8fac298b3c987e01663d3941a22f084d3d49:final_pjt_front/src/views/CommunityView.vue
           <td>
             <span v-if="Communityarticle.board_type == 0">Talk</span>
             <span v-else-if="Communityarticle.board_type == 1">Review</span>
