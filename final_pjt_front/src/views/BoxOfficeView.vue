@@ -1,12 +1,12 @@
 <template>
   <div>
+    <div class="Boxoffice-title d-flex justify-content-center">
     <h1>BoxOffice</h1>
+    </div>
     <br />
     <hr />
-    <h2>DailyBoxOffice</h2>
     <DailyBoxoffice />
     <hr />
-    <h2>WeeklyBoxOffice</h2>
     <WeeklyBoxoffice />
   </div>
 </template>

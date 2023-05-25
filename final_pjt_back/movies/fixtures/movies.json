@@ -2742,24 +2742,6 @@
         }
     },
     {
-        "pk": 1087040,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1087040,
-            "title": "머니 샷: 폰허브를 말하다",
-            "release_date": "2023-03-15",
-            "popularity": 148.993,
-            "vote_average": 5.8,
-            "vote_count": 201,
-            "overview": "폰허브의 성공과 추문에 대해 깊숙이 파헤친다. 배우, 운동가 그리고 전직 직원들의 인터뷰로 이루어진 다큐멘터리.",
-            "poster_path": "/kpTqWqLYcf1uErnx5VXLah4EWJZ.jpg",
-            "backdrop_path": "/sGE6N1vJjxZLkOJEXdIOqTslxuL.jpg",
-            "genre_ids": [
-                99
-            ]
-        }
-    },
-    {
         "pk": 937278,
         "model": "movies.movie",
         "fields": {
@@ -3684,25 +3666,6 @@
             "genre_ids": [
                 878,
                 27
-            ]
-        }
-    },
-    {
-        "pk": 218746,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 218746,
-            "title": "젊은 엄마",
-            "release_date": "2013-07-31",
-            "popularity": 96.188,
-            "vote_average": 5,
-            "vote_count": 12,
-            "overview": "열아홉 불타오르는 질풍욕정의 시절, 재수생 진구는 미모의 영어 과외 선생님을 떠올리며 혼자만의 에로틱한 상상을 즐긴다. 그러던 어느 날, 그녀에게 적나라한 순간을 들키며 어색한 분위기가 되는 두 사람. 하지만 위기는 곧 기회라고 했던가. 그녀는 진구에게 영어가 아닌 섹스를 가르치기 시작하고 두 청춘의 통제 불능 로맨스가 시작된다. 하지만 결혼을 핑계로 그녀가 과외를 그만두게 되고 이 사랑도 끝이 난다.  어느덧 시간이 흘러 성인이 된 진구. 이젠 애정 없는 섹스에 익숙하다. 하지만 육체적 사랑뿐이던 애인이 임신을 하며 일대 파란이 인다. 달갑지 않은 결혼과 장모와의 첫 만남. 그런데…너무나 아름답고 섹시하다. 진구는 데릴사위가 되어 장모와 한 집에 살게 되지만 철 없는 아내의 불륜과 도망으로 결혼 생활은 결국 파탄 나고 만다. 자신의 딸이 저지른 배신으로 미안해 어쩔 줄 모르는 장모. 진구는 장모의 제안으로 아이, 장모와 함께 기묘하고도 위험한 동거를 시작한다.",
-            "poster_path": "/x73C5Hi8FuxCWdmY67evoV9V7xi.jpg",
-            "backdrop_path": "/4UYJvZkYcKbOc8Mor0EhoVaVkGE.jpg",
-            "genre_ids": [
-                35,
-                10749
             ]
         }
     },
@@ -5964,25 +5927,6 @@
         }
     },
     {
-        "pk": 86331,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 86331,
-            "title": "Q - 섹스힐링",
-            "release_date": "2011-10-06",
-            "popularity": 81.633,
-            "vote_average": 6.1,
-            "vote_count": 710,
-            "overview": "자유분방하게 살아온 세실(데보라 레비)은 아버지를 떠나 보낸 상실감에 스스로를 학대하듯 처음 보는 남자 매트(고완 디디)를 유혹하며 도발적인 성적 유희에 빠져든다. 마치 활화산 같은 욕망의 분출이 자신의 해방구인 것처럼.  치명적인 유혹을 즐기듯 거침없이 몸을 던지는 세실은 연인 찬스(조니 아마로)와도 온몸을 사르는 불 같은 사랑에 빠져보지만 굶주린 욕망은 좀처럼 채워지지 않는다. 마찬가지로 출구 없는 삶에서 뜨거운 열정을 숨기듯 안고 사는 앨리스(헬렌 짐머)는 자신의 욕망을 대리 분출시키려는 세실로 인해 아슬아슬해서 더욱 위험한 욕망에 사로잡힌다. 결국 세실과 앨리스는 대담하게도 섹스리스 커플을 치료하는 ‘섹스힐링’에 나서고, 급기야는 친구들과 함께 집단 매춘에 뛰어들어 끝간 데를 모를 욕망의 화신들로 변해가는데…",
-            "poster_path": "/yBTElYnRkwySYzMunE6urPT9LvT.jpg",
-            "backdrop_path": "/zbTaYrQzZaaEf1SZlv3RTZiUvZw.jpg",
-            "genre_ids": [
-                18,
-                10749
-            ]
-        }
-    },
-    {
         "pk": 524434,
         "model": "movies.movie",
         "fields": {
@@ -6574,24 +6518,6 @@
                 35,
                 12,
                 10751
-            ]
-        }
-    },
-    {
-        "pk": 87584,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 87584,
-            "title": "셀러브리티 섹스 테이프",
-            "release_date": "2012-02-02",
-            "popularity": 76.431,
-            "vote_average": 4.5,
-            "vote_count": 58,
-            "overview": "찌질한 녀석들의 포르노 제작 도전기!\r 떼돈 벌고, 총각딱지 떼고! 이보다 황홀할 수는 없다!  여자친구 ‘킴’과 4년째 키스 이상의 진도를 나가지 못하는 숫총각 ‘로스’, 잘나가는 녀석들의 숙제셔틀 ‘앤디’, 영어를 못하는 동양인 ‘관호’, 두꺼운 안경에 자폐증 증세가 있는 ‘마커스’, 그리고 포르노사이트 관리 아르바이트를 하는 ‘덕’! 교내 게임 동호회 회원들이자 룸메이트인 이들은 한 파티에서 우연히 한 물간 여배우 ‘멜로니 아담스’와 ‘앤디’의 섹스장면을 촬영해 인터넷에 올리게 된다. 하지만 재미로 올렸던 동영상이 엄청난 조회수를 기록하며 ‘멜로니 아담스’를 스타덤에 올려놓자, 왕년의 여배우들로부터 홍보용 포르노를 촬영하자는 요청이 빗발치는데…",
-            "poster_path": "/3FWSUD1yIvGPmLIXgyOS72MrTrC.jpg",
-            "backdrop_path": "/3VssWM01TW8Qs0KP3xCsrYQF89A.jpg",
-            "genre_ids": [
-                35
             ]
         }
     },
@@ -8469,24 +8395,6 @@
         }
     },
     {
-        "pk": 502242,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 502242,
-            "title": "미용실 특별한 서비스 2",
-            "release_date": "2018-02-13",
-            "popularity": 68.521,
-            "vote_average": 7,
-            "vote_count": 4,
-            "overview": "\"손님, 저한테 다 맡겨주세요.\"  머리부터 발끝까지 만족시키는 특별한 미용실이 온다!  퇴폐업소로 유명한 미용실에서 일하게 된 혜진. 처음에는 몸으로 서비스한다는 사실이 꺼림칙했지만, 어느 순간부터 적극적으로 손님을 탐하게 된다. 여사장의 스페셜 노하우까지 전수 받으며 승승장구하는 혜진. 그런데 새로 뽑은 섹스머신 주희가 지치지 않는 체력으로 모든 손님을 독차지하기 시작하는데…",
-            "poster_path": "/5qFTCvx1h1CsHqbAuqo68J8GSub.jpg",
-            "backdrop_path": null,
-            "genre_ids": [
-                10749
-            ]
-        }
-    },
-    {
         "pk": 550,
         "model": "movies.movie",
         "fields": {
@@ -9557,25 +9465,6 @@
         }
     },
     {
-        "pk": 559682,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 559682,
-            "title": "후배부부와 교환섹스",
-            "release_date": "2018-06-29",
-            "popularity": 62.262,
-            "vote_average": 1.5,
-            "vote_count": 2,
-            "overview": "",
-            "poster_path": "/sfvm3b97Qqkb7IacjApJjZFno80.jpg",
-            "backdrop_path": "/7Wv1GSb9qyvVgpVWhps369kPqm8.jpg",
-            "genre_ids": [
-                18,
-                10749
-            ]
-        }
-    },
-    {
         "pk": 994751,
         "model": "movies.movie",
         "fields": {
@@ -9732,24 +9621,6 @@
                 14,
                 12,
                 10751
-            ]
-        }
-    },
-    {
-        "pk": 592695,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 592695,
-            "title": "플레저",
-            "release_date": "2021-10-08",
-            "popularity": 48.122,
-            "vote_average": 6.3,
-            "vote_count": 357,
-            "overview": "벨라 체리는 포르노 영화 배우의 꿈을 안고 로스앤젤레스에 도착하지만,  그녀는 그녀의 야망과 교활함을 활용하여 이 매혹적이고 독특한 세계의  정상에 오르기 위해 노력하지만 그런 명성이 쉽게 오지 않는다는 것을 곧 알게 된다.",
-            "poster_path": "/tPyt2CpXceNGj192VVG7G9gjph5.jpg",
-            "backdrop_path": "/y0LhmaMYpFkIfrUlOpJYTVMH2eA.jpg",
-            "genre_ids": [
-                18
             ]
         }
     },
@@ -10647,24 +10518,6 @@
         }
     },
     {
-        "pk": 390845,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 390845,
-            "title": "맛있는 비행",
-            "release_date": "2015-11-01",
-            "popularity": 56.082,
-            "vote_average": 4,
-            "vote_count": 54,
-            "overview": "홍콩(?)행 기내 서비스가 시작됩니다! 광활한 창공에서 펼쳐지는 리얼 19금 연애담! 청순가련의 대명사였지만 아이돌과의 섹스 스캔들로 도망친 여배우, 그녀의 모든 커리어를 망쳐 버린 발랑 까진 아이돌, 그녀에게 절대 충성하는 열혈 매니저, 그리고 이제는 섹시한 승무원이 된 매니저의 전 여친까지! 절대 만나선 안 될 네 사람이 비행기 안에서 마주쳤다. 도망칠 수 없는 그곳에서 지나치게 발칙하고 지독하게 화끈한 로맨스가 펼쳐진다.",
-            "poster_path": "/xLZQdhtdQasK2LwD86xhwe19pYG.jpg",
-            "backdrop_path": "/7MXxVfzj77qA6aV3cOnj1AZnyDg.jpg",
-            "genre_ids": [
-                10749
-            ]
-        }
-    },
-    {
         "pk": 98008,
         "model": "movies.movie",
         "fields": {
@@ -10864,25 +10717,6 @@
         }
     },
     {
-        "pk": 554447,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 554447,
-            "title": "여직원의 맛",
-            "release_date": "2018-05-28",
-            "popularity": 64.086,
-            "vote_average": 5.2,
-            "vote_count": 32,
-            "overview": "*여직원의 맛*  박과장은 사무실에서 호시탐탐 여직원 가희를 두고 혼자만의 상상을 하는데 이런 박과장의 시선이 너무 부담스러운 가희, 어느날 박과장이 먼저 퇴근하고 비밀연애를 하는 직장동료 우진과 사무실에서 섹스를 즐긴다. 잠시후 퇴근한 박과장이 문을 여는데...  *극장의 맛1*  극장에서 영화를 보고있는 연인, 영호와 수련은 주변에 사람이 없자 수련에게 들이대는 영호, 뒤에 사람이 있다며 영호를 말린다. 잠시후 화장실에 갔다온 수련은 안경이 부서져서 앞을 잘 못보고 영호가 아닌, 낯선 남자 옆으로 가는데...  *모텔의 맛*  학교선후배 영호와 혜진이 모텔에서 맥주를 마신다. 혜진이 조만간 남자친구와 첫날밤을 치룰 것이라며, 예행연습을 하자고 후배한테 제안한다. 영호는 걱정말라며 호기롭게 이야기 하지만, 이내 혜진의 첫경험이 처음이 아닌 것을 느낀다.  *극장의 맛2*  시련의 상처로 혼자 영화보고 있는 영호 옆으로 낯선 여자 수련이 앉는다.영호의 사연을 우연히 듣게 되고, 영호를 위로하던 중 조용한 극장에서 둘만의 섹스를 즐긴다.",
-            "poster_path": "/sf5l6ZsSgzgxZ3IicFfkOXp8AZy.jpg",
-            "backdrop_path": "/t1XwJqQNH6CPgkG2vU5i82U12Tt.jpg",
-            "genre_ids": [
-                18,
-                10749
-            ]
-        }
-    },
-    {
         "pk": 800815,
         "model": "movies.movie",
         "fields": {
@@ -11001,25 +10835,6 @@
                 12,
                 28,
                 14
-            ]
-        }
-    },
-    {
-        "pk": 75338,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 75338,
-            "title": "강간 2 - 제복유혹",
-            "release_date": "1998-03-06",
-            "popularity": 51.144,
-            "vote_average": 4.7,
-            "vote_count": 11,
-            "overview": "13살 때 사촌누나로부터 성을 경험한 필립은 제복 입은 여자에게 특히 매료된다. 간호사와 사귀고 싶어 치과의사가 된 필립은 자기 병원 간호사를 애인으로 삼아 섹스를 즐기는 한편 색다른 제복의 여성을 찾는다. 그는 여자 주차단속원을 강간한 후 증거를 남기지 않기 위해 살해해버린다. 한편 여자 밝힘증 때문에 감옥에 갔던 건달 통치는 출감해 이 사건에 휘말린다.",
-            "poster_path": "/xkRK9fXGgOZZsXUbla2zVpJSYgS.jpg",
-            "backdrop_path": "/1hXAsJTBwwdMTjFEEQaPf9jMY2S.jpg",
-            "genre_ids": [
-                27,
-                53
             ]
         }
     },
@@ -14212,25 +14027,6 @@
                 12,
                 16,
                 10751
-            ]
-        }
-    },
-    {
-        "pk": 342677,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 342677,
-            "title": "세라복 색정사육",
-            "release_date": "1982-11-15",
-            "popularity": 60.245,
-            "vote_average": 6,
-            "vote_count": 5,
-            "overview": "변태적이고 뒤틀린 스토커의 여고생 로망 포르노",
-            "poster_path": "/7JqwkwrhuVgh0PP9TlcQ1uNVu0C.jpg",
-            "backdrop_path": "/uKqswSicwIYiGFW5piD5X7My3cg.jpg",
-            "genre_ids": [
-                18,
-                80
             ]
         }
     },
@@ -19319,24 +19115,6 @@
         }
     },
     {
-        "pk": 440249,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 440249,
-            "title": "포르노의 막이 내린 후에 2",
-            "release_date": "2017-03-28",
-            "popularity": 36.094,
-            "vote_average": 5.4,
-            "vote_count": 212,
-            "overview": "은퇴한 포르노 스타들을 만나 성공담과 애환, 후회되는 일 등 성인영화 업계에 몸담았던 시절의 경험담을 들어본다.",
-            "poster_path": "/rfItXrtDGILwsCdmgVxX79phFuI.jpg",
-            "backdrop_path": "/n9BtaFW7aMDNiX9Rrc858vR5TTn.jpg",
-            "genre_ids": [
-                99
-            ]
-        }
-    },
-    {
         "pk": 705861,
         "model": "movies.movie",
         "fields": {
@@ -19511,26 +19289,6 @@
             "backdrop_path": "/lQzSMhkAl90iXPirjnLbRHkxApC.jpg",
             "genre_ids": [
                 27
-            ]
-        }
-    },
-    {
-        "pk": 22705,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 22705,
-            "title": "모넬라 2",
-            "release_date": "2000-01-28",
-            "popularity": 47.381,
-            "vote_average": 5.5,
-            "vote_count": 207,
-            "overview": "칼리는 성적 매력이 넘치는 스무살의 자유분방한 아가씨이고, 그녀의 애인인 마테오는 베니스대학의 경영학도이다. 그들은 서로의 육체에 강하게 탐닉하고, 서로에게 강한 집착을 보인다. 하지만 칼라의 매력은 모든 남자들의 시선을 한몸에 받기에 충분하다. 마테오는 그런 그녀를 항상 불안해하면서도 그녀를 신뢰하지 못하는 자신을 스스로 비난한다.\r 칼라도 마테오를 신뢰하고 사랑하지만 한편으론 다른 남자의 시선을 즐긴다. 일 관계로 베니스에서 런던으로 온 칼라는 집을 구하기 위해 부동산 중개소를 찾아간다. 그 곳에서 섹슈얼한 매력을 풍긴느 중개인 모이라를 만나게 된다. 칼라의 육체에 반한 모이라는 그녀에게 적극적인 구애 공세를 펼치고 칼라는 혼란에 빠진다.\r 모이라의 도움으로 싼 집을 얻은 칼라는 모이라와의 관계에 불안을 느끼고 남자친구 마테오에게 어서 오라는 전화를 건다. 칼라가 부탁한 팬티와 프로이드 책을 가지러 칼라의 집으로 간 마테오는 연애편지 묶음과 해변에서 찍은 칼라의 누드 사진을 보고 당장 런던으로 달려가 어떻게 된일인지를 따져 묻는다.",
-            "poster_path": "/66O71VlmohX9Oz6wyK3FD4xFCtA.jpg",
-            "backdrop_path": "/n74r1dfTqnArIGC8VNU8k0gHf04.jpg",
-            "genre_ids": [
-                35,
-                18,
-                10749
             ]
         }
     },
@@ -21050,24 +20808,6 @@
         }
     },
     {
-        "pk": 8275,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 8275,
-            "title": "아메리칸 파이: 더 네이키드 마일",
-            "release_date": "2006-12-07",
-            "popularity": 33.742,
-            "vote_average": 5.5,
-            "vote_count": 1836,
-            "overview": "몸이 아프단 핑계로 혼자 집에 있던 에릭은 그동안 숨겨뒀던 포르노 비디오를 본다. 마침 엄마 아빠가 모시러 간 할머니가 집에 들어오는 순간, 흥분한 에릭은 사정을 하고, 그걸 맞은 할머니는 숨을 거둔다. 여자친구 트레이시와 섹스를 하기로 한 에릭은 당장 트레이시의 집으로 달려가지만, 트레이시의 아빠가 내려오는 바람에 둘의 계획은 어긋나고 만다. 에릭은 트레이시의 허락 하에 친구 마이크, 라이언과 함께 누드 달리기 대회를 한다는 사촌 드와이트의 대학교 기숙사에 가기로 한다.",
-            "poster_path": "/sreeL5kKj47oofEGVtDKTAcUDY6.jpg",
-            "backdrop_path": "/tYtXujRIob4y5xL4cbyB7AueaSv.jpg",
-            "genre_ids": [
-                35
-            ]
-        }
-    },
-    {
         "pk": 662708,
         "model": "movies.movie",
         "fields": {
@@ -22104,25 +21844,6 @@
             "overview": "뛰어난 패션센스에 매력적인 성격이지만 통통한 몸매가 불만인 르네, 예뻐지기만 하면 뭐든 다 할 수 있을 것만 같다. 하늘에 온 마음을 담아 간절히 소원을 빌지만 당연히 달라지는 건 1%도 없고. 오늘도 헬스클럽에서 스피닝에 열중하는 르네. 그러나 과도한 열정은 오히려 독이 되는 법. 미친 듯이 페달을 밟다가 헬스 클럽 바닥에 내동댕이쳐져 머리를 부딪히고, 지끈지끈한 머리, 창피해서 빨개진 얼굴로 겨우 일어났는데 뭔가 이상하다. 거울 속의 내가… 좀 예쁘다?! 드디어 소원성취한 르네의 참을 수 없는 웃음이 터진다!",
             "poster_path": "/5tw2FTUOBIyg6BcEtE5N2Dxut2N.jpg",
             "backdrop_path": "/7XM7kxa3U2g8TO3OGSiETCroNRD.jpg",
-            "genre_ids": [
-                35,
-                10749
-            ]
-        }
-    },
-    {
-        "pk": 2105,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 2105,
-            "title": "아메리칸 파이",
-            "release_date": "1999-07-09",
-            "popularity": 31.749,
-            "vote_average": 6.6,
-            "vote_count": 6948,
-            "overview": "이스트그레이트 폴츠 고등학교(East Great Falls High School) 졸업반이 된 네 녀석들은 지상 최대의 고민에 빠져있다! 도대체 어떻게 하면 '총각 딱지'을 떼어버릴 수 있을까? 결국 졸업하기 전까지는 하늘이 두쪽나도 그걸 떼버리고야 말리라 다짐한 이들은 '성공적인 첫 경험'을 위한 다각적 전술을 세우기 시작한다.  지미(Jim: 제이슨 비그스 분)는 성인 채널, 포르노 사이트, 풍선도 아닌데 불어보는 콘돔. 혼자서 어떻게든 그걸 해결해 보려고 한다. 그러던 중 엄마가 먹으라고 구워놓은 애플파이에 구멍을 뚫어 그걸(?) 하던 중 아빠에게 들키고 만다. 도대체 왜 그랬을가? 하지만 그에게도 나디아(Nadia: 샤논 엘리자베스 분)라는 여학생이 숙제를 도와달라며 기회가 찾아온다.  케빈(Kevin: 토마스 이안 니콜라스 분)은 사랑보다는 섹스라는 구체적인 말을 더 믿는다. 오랜 여자 친구 비키(Victoria 'Vicky': 타라 레이드 분)와 항상 가다가 마는, 결국은 아직까지 한번도 제대로 해보지 못한 미완의 커플. 어떻게든 성공적으로 해보고 싶은 케빈은 섹스의 백과사전이랄 수 있는 섹스 바이블을 입수하는데.  미식축구 선수 오즈(Chris \"Oz\" Ostreicher: 크리스 클레인 분)는 노바, 일명 카사노바로 자칭하지만 실제로는 근처에도 가보지 못했다. 우연히 아카펠라 합창단원인 헤더(Heather: 메나 수바리 분)에게 첫눈에 반해 덩달아 합창단에 들어가게 된다. 그러나 요조 숙녀 헤더는 오즈와 친구들의 외설스런 대화를 듣고 실망하는데.  결벽증이 있는 핀치(Finch: 에디 케이 토마스 분)는 늘 그것(?) 보다는 커피와 카푸치노의 차이에 대해 열변을 토하는 술취한 철학자. 평소 섹스엔 전혀 관심없는 척 하던 그는 작전돌입 후 여학생들에게 자기의 그것(?)이 가장 크다는 소문을 내어 호기심을 유발시키려하는데...",
-            "poster_path": "/mMprGx972sf1TCI8gZUIVkicSHc.jpg",
-            "backdrop_path": "/7hQTANu5TAEe4jrTerYHszyTOpV.jpg",
             "genre_ids": [
                 35,
                 10749
@@ -24170,25 +23891,6 @@
         }
     },
     {
-        "pk": 112160,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 112160,
-            "title": "밝히는 가족의 섹스 스토리",
-            "release_date": "2012-05-09",
-            "popularity": 41.776,
-            "vote_average": 4.9,
-            "vote_count": 241,
-            "overview": "프랑스 교외 도시의 평범한 가족. 하지만 모든 가족에게 비밀은 있다. 자위에 집착하고 수업시간에 핸드폰으로 몰래 자신을 촬영하는 데 재미를 붙인 로맹으로 인해 가족의 평온한 일상은 흔들리기 시작하고, 가족 내에서 금기시되었던 섹스는 중요한 관심사로 변한다. 10대 청소년에서 70대 노인까지, 섹스는 누구에게나 풀리지 않는 숙제인 법.",
-            "poster_path": "/vQDwzFYs1T3CQ26kzJVTWSeAocQ.jpg",
-            "backdrop_path": "/6V6y3aBbzO9fQDDjEPxtOI6vzBh.jpg",
-            "genre_ids": [
-                35,
-                18
-            ]
-        }
-    },
-    {
         "pk": 265208,
         "model": "movies.movie",
         "fields": {
@@ -24620,24 +24322,6 @@
         }
     },
     {
-        "pk": 742360,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 742360,
-            "title": "못말리는 며느리",
-            "release_date": "2020-09-10",
-            "popularity": 36.516,
-            "vote_average": 5,
-            "vote_count": 1,
-            "overview": "승하는 결혼한지 얼마 되지도 않았는데 남편 도진과의 섹스가 점점 만족스럽지 못해 불만이다.  혹시 도진이 바람피우는 게 아닌가 의심을 하기 시작한다. 시아버지 해일은 개방적이고 친근하게 구는 승하가 너무 마음에 든다. 그런데 그 정도가 점점 지나치기 시작했고 급기야 승하와 섹스 하는 꿈까지 꾸기 시작했다. 어느 날 승하는 도진이 결혼 전부터 만나는 여자가 따로 있었고 지금까지도 그 여자와 바람피우고 있다는 사실을 알게 된다.  이에 화가 난 승하가 이혼을 결심하게 되는데...​",
-            "poster_path": "/25EMuJUKicj0YKcGIUeK2O7M6Wq.jpg",
-            "backdrop_path": "/6RCQ8xFg0Y19oYFjO4Vh0ncXQ8k.jpg",
-            "genre_ids": [
-                18
-            ]
-        }
-    },
-    {
         "pk": 197158,
         "model": "movies.movie",
         "fields": {
@@ -24725,24 +24409,6 @@
             "backdrop_path": "/uXADu1mfgTwNkBjgtDkLQRt5N8a.jpg",
             "genre_ids": [
                 99
-            ]
-        }
-    },
-    {
-        "pk": 8274,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 8274,
-            "title": "아메리칸 파이: 썸머 캠프",
-            "release_date": "2005-10-30",
-            "popularity": 26.461,
-            "vote_average": 5.5,
-            "vote_count": 1884,
-            "overview": "스티플러의 동생 매트는 형이 제작해서 크게 성공한 비디오 사업에 참여하길 바라지만, 형은 그의 재능을 인정하지 않는다. 매트와 그의 친구들은 졸업반이 되고, 선배들의 졸업식에서 재미있는 행사를 준비하기로 결정한다. 그러나 고적대 여학생들에게 저지른 짓궂은 장난 때문에 매트는 퇴학의 위기를 맞게 된다. 학교의 카운셀러이자 짐의 듬직한 아버지 레벤스타인이 내놓은 해결책은 매트가 여름 내내 캠프에서 허드렛일과 빨래, 청소를 해야 한다는 것. 매트는 썸머 캠프가 섹스가 넘치는 곳이라는 이야기를 기억해 낸다. 그는 스티플러의 어린 동생이라는 딱지를 떼기 위해 캠프에서 자신만의 비디오 영상을 만들기로 결심하지만 졸업식에서 매트에게 망신을 당한 여학생들은 그를 괴롭히고, 매트는 빨리 그들과 좋은 사이가 되어야 한다는 것을 실감한다. 매트는 문신과 피어싱 매니아인 튜바 연주자 클로에에게 반한 룸메이트 에린을 도와주는 한편 짐과 결혼한 미셸의 사촌 여동생이자 밴드의 드럼 연주자인 엘리스와 친해지려고 노력한다. 영상을 만들기 위해 와이어를 이용한 몰래 카메라를 설치하는 등 노력을 아끼지 않던 매트지만 엘리스에게 푹 빠져들면서 자신과의 싸움을 시작하게 된다. 과연 매트는 여자들의 신뢰를 얻고 캠프가 섹시한 환락의 성이라는 것을 확인할 수 있을까? 형의 명성을 넘어 고유한 자기 자신을 찾을 수 있을까?",
-            "poster_path": "/foM9q2UcNrYoLGN3oUaB3jhtLPg.jpg",
-            "backdrop_path": "/TWchvpMO36QZTIiNjFBm4MYsmQ.jpg",
-            "genre_ids": [
-                35
             ]
         }
     },
@@ -25455,24 +25121,6 @@
         }
     },
     {
-        "pk": 10358,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 10358,
-            "title": "잭 앤 미리, 포르노 만들기",
-            "release_date": "2008-09-18",
-            "popularity": 34.11,
-            "vote_average": 6.3,
-            "vote_count": 2101,
-            "overview": "어렸을 때부터 온갖 것을 다 보고 자라온 동창생 잭과 미리. 내세울 것 하나 없이 졸업한 그들은 현재는 룸메이트 관계로 인연을 이어간다. 잭과 미리는 이것저것 닥치는 대로 일하지만 수도는 끊기고 방세는 쌓여만 간다. 늘어만 가는 빚을 갚을 방법을 찾다가 마지막으로 아마추어 정신으로 포르노 만들기에 도전한다.  패러디를 위한 영화를 제작하지만 한달 간 빌린 촬영장이 하루 만에 무너지는 사고를 당한다. 좌충우돌하며 영화를 완성하는 사이, 플라토닉 한 관계를 유지했던 그들에게도 변화가 생기기 시작하는데...",
-            "poster_path": "/j2wPdpgWENQZ3BGY3KBPMmjM103.jpg",
-            "backdrop_path": "/qCSLKtNrL9xIyw2kjzi0GEUvqXx.jpg",
-            "genre_ids": [
-                35
-            ]
-        }
-    },
-    {
         "pk": 772446,
         "model": "movies.movie",
         "fields": {
@@ -25907,24 +25555,6 @@
         }
     },
     {
-        "pk": 50270,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 50270,
-            "title": "파프리카",
-            "release_date": "1991-02-13",
-            "popularity": 34.298,
-            "vote_average": 7.1,
-            "vote_count": 335,
-            "overview": "성적 욕망대로 사는 젊은 창녀들이 운명에 대항해 씩씩하게 사는 모습을 그리는 야한 드라마. 시골 소녀 파프리카는 도시로 나와 남자친구의 사업자금을 위해 한 고급 유곽에 들어간다. 그곳은 미지의 관능 세계였다. 수수께끼 같은 여주인과 창녀들의 지도를 받고, 이윽고 마담이 지어준 파프리카라는 이름으로 성의 세계로 깨어난다. 이리하여 그녀는 남자의 욕망에 절대 복종하게 되는데...",
-            "poster_path": "/h9n9icL3iqaVyw9t9JQaaPhfrsn.jpg",
-            "backdrop_path": "/9CkI4VsYF8qJWfZpPqwZnBctb3M.jpg",
-            "genre_ids": [
-                18
-            ]
-        }
-    },
-    {
         "pk": 955,
         "model": "movies.movie",
         "fields": {
@@ -25941,24 +25571,6 @@
                 12,
                 28,
                 53
-            ]
-        }
-    },
-    {
-        "pk": 575713,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 575713,
-            "title": "잠 못 이루는 섹스2",
-            "release_date": "2016-05-19",
-            "popularity": 39.318,
-            "vote_average": 0,
-            "vote_count": 0,
-            "overview": "",
-            "poster_path": "/iJHKqC9hwUmgRv2mdPcvSLVMyYf.jpg",
-            "backdrop_path": "/z7abw6M3OA1ysLLM5z9qNleK7I7.jpg",
-            "genre_ids": [
-                10749
             ]
         }
     },
@@ -28908,24 +28520,6 @@
         }
     },
     {
-        "pk": 458083,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 458083,
-            "title": "탐하다: 욕망의 섬",
-            "release_date": "2017-05-04",
-            "popularity": 38.056,
-            "vote_average": 4.2,
-            "vote_count": 6,
-            "overview": "한적한 시골 어귀에서 낚싯배에 오른 사람들은 마음 속 깊은 욕망에 눈을 뜬다. 돈, 섹스, 권력... 끝없는 욕망이 얽힌 무인도에서 일행 중 누군가가 시체로 발견되고, 섬에는 또 다른 누군가가 있다는 사실이 밝혀진다. 과연 이들은 욕망의 섬에서 무사히 탈출할 수 있을까?",
-            "poster_path": "/zNebLQ3O2BNNI1qCDqTRCzxJTrS.jpg",
-            "backdrop_path": "/bcVvmv9txmENrTFv79m9KdI538n.jpg",
-            "genre_ids": [
-                10749
-            ]
-        }
-    },
-    {
         "pk": 18334,
         "model": "movies.movie",
         "fields": {
@@ -29058,25 +28652,6 @@
             "backdrop_path": "/ixD3dDsl0OV7rdnJIeloXQtxM9N.jpg",
             "genre_ids": [
                 18,
-                10749
-            ]
-        }
-    },
-    {
-        "pk": 372921,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 372921,
-            "title": "공즉시색",
-            "release_date": "2015-12-01",
-            "popularity": 44.44,
-            "vote_average": 5.4,
-            "vote_count": 7,
-            "overview": "청순한 얼굴, 섹시한 바디, 모든 것을 다 갖춘 명문 미대의 미녀 삼총사 ‘호경’, ‘주영’, ‘연희’! 남자를 너무 몰라서, 또 너무 알아서 곤란한 그녀들은 자꾸만 치근덕거리는 시시한 남자들 말고 자신들을 만족시킬 수 있는 진짜 남자를 찾기로 결심한다. 누드모델 출신 식스팩을 자랑하는 조각남, 완벽한 테크닉으로 무장한 연하남, 여자 보기를 황금 같이 하는 돌쇠남까지! 그들을 유혹하기 위한 섹시 발랄 여대생들의 화끈하고 과감한 바디어택. 이제 그녀들의 거침없는 남친 만들기 프로젝트가 시작된다.",
-            "poster_path": "/k8dsPTp1Ga67c0Ie00qyR3vcPG3.jpg",
-            "backdrop_path": "/flBvN0JFdf7jTMtr0RAHAToUQz9.jpg",
-            "genre_ids": [
-                35,
                 10749
             ]
         }
@@ -29394,25 +28969,6 @@
             "genre_ids": [
                 10749,
                 35
-            ]
-        }
-    },
-    {
-        "pk": 2770,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 2770,
-            "title": "아메리칸 파이 2",
-            "release_date": "2001-08-10",
-            "popularity": 25.197,
-            "vote_average": 6.2,
-            "vote_count": 4429,
-            "overview": "파란 만장했던 고교시절을 보내고 대학생활을 시작한 짐, 케빈, 오즈, 핀치 그리고 스티플러 이렇게 5명의 친구들은 이제 대학생이 되어 맞게 되는 첫 여름방학을 맞아 고향에서 다시 뭉친다. 아직도 섹스와 예쁜 여자만 집착하는 5명의 말썽꾸러기 친구들은 어떻게 하면 환상적으로 첫 여름방학을 보낼까 궁리를 하던 중에 케빈의 형 조언대로 해변가에 빌라를 빌려 각자의 파트너들과 친구들을 불러 멋진 파티를 열어 그야말로 최고의 추억을 만들 계획을 세우게 된다.",
-            "poster_path": "/uMpOpH9pqigL3dd3ND7ZN1U7zCy.jpg",
-            "backdrop_path": "/uKiMpSGhKHDfZ7TwNfVFDLwvNRR.jpg",
-            "genre_ids": [
-                35,
-                10749
             ]
         }
     },
@@ -31472,25 +31028,6 @@
         }
     },
     {
-        "pk": 351819,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 351819,
-            "title": "블랙의 50가지 그림자",
-            "release_date": "2016-01-28",
-            "popularity": 26.265,
-            "vote_average": 4.9,
-            "vote_count": 1237,
-            "overview": "\"블랙씨가 이제 만나시겠답니다.\"  순수하지만, 매력은 조금 떨어지는 사회 초년생 '해나'는  아픈 친구를 대신해 잘나가는 흑인 갑부 CEO '크리스찬 블랙'을 인터뷰하게 된다.  섹시 여비서의 경고에도 불구하고  여자라면 빠져들 수밖에 없는 '블랙'의 묘한 마력에 단숨에 매료된 '해나'.  그 역시 신선한 매력의 모태솔로 '해나'에게 호기심을 갖는다.  한편, '해나'는 누가 봐도 완벽남 '블랙'이  어린 시절 연상의 음악 선생님에게 당한 치욕적인 굴욕으로 인해  독특한 성적 취향을 지녔다는 사실을 알게 된다  '블랙'의 비밀의 방에 입실하게 된 '해나'.  그녀 역시 거부할 수 없는 본능에 서서히 눈을 뜨게 되는데.....",
-            "poster_path": "/gz3ucJ7DaRdZ5QpmSRLwg5YfaVw.jpg",
-            "backdrop_path": "/quxidIBA4BNKRbk03JBRzu586Ep.jpg",
-            "genre_ids": [
-                10749,
-                35
-            ]
-        }
-    },
-    {
         "pk": 87421,
         "model": "movies.movie",
         "fields": {
@@ -32473,25 +32010,6 @@
         }
     },
     {
-        "pk": 41630,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 41630,
-            "title": "친구와 연인사이",
-            "release_date": "2011-01-21",
-            "popularity": 35.892,
-            "vote_average": 6.3,
-            "vote_count": 4277,
-            "overview": "생물학적으로 일부일처제는 있을 수 없다고 믿는 엠마, 아버지에게 전 여친을 빼앗긴 후 사랑을 믿지 않는 아담. 서로에 대해 너무나 잘 아는 이들의 오랜 우정 사이에 어느 날 보너스(?)가 붙기 시작했다. 바로 ‘섹스’ 라는 특별 보너스가! 한 번의 섹스가 그들의 관계를 180도 바꿔 놓았다! 하지만 친구에서 결코 연인이 되고 싶지는 않았던 두 사람은 서로가 원한다면 언제 어디서든 뜨거운 섹스가 가능한 둘만의 은밀하고 아찔한 “조건 없이 즐기기” 규칙을 정하기에 이르는데… 과연 이 둘은 섹스만 즐기면서 사랑이란 걸림돌을 피해 갈 수 있을까? 이들의 오랜 우정은 지켜질 수 있을까?",
-            "poster_path": "/yxyxPMIyx1swMuJ5T68kEf51KcC.jpg",
-            "backdrop_path": "/tlbGPwXp2eWZaijWqYXiHYwKuF8.jpg",
-            "genre_ids": [
-                35,
-                10749
-            ]
-        }
-    },
-    {
         "pk": 483452,
         "model": "movies.movie",
         "fields": {
@@ -33131,25 +32649,6 @@
         }
     },
     {
-        "pk": 10591,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 10591,
-            "title": "내겐 너무 아찔한 그녀",
-            "release_date": "2004-04-09",
-            "popularity": 27.24,
-            "vote_average": 6.7,
-            "vote_count": 3045,
-            "overview": "고등학교 졸업반인 매튜는 이웃집에 이사온 19세의 다니엘에게 첫 눈에 반한다. 아름다운 그녀에게 홀딱 빠진 매튜는 결국 다니엘과 사귀게 된다. 그러나 다니엘이 전직 포르노 스타라는 것을 알게 되고 갈등을 겪기 시작하는데...",
-            "poster_path": "/xwZJo5B48TdkbHS1V0GLWGbtEX6.jpg",
-            "backdrop_path": "/qvcOovScPoRalRxDy50rYSYFree.jpg",
-            "genre_ids": [
-                35,
-                10749
-            ]
-        }
-    },
-    {
         "pk": 424139,
         "model": "movies.movie",
         "fields": {
@@ -33185,24 +32684,6 @@
                 28,
                 53,
                 80
-            ]
-        }
-    },
-    {
-        "pk": 11397,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 11397,
-            "title": "섹스 아카데미",
-            "release_date": "2001-12-07",
-            "popularity": 27.388,
-            "vote_average": 5.8,
-            "vote_count": 1786,
-            "overview": "고교 스타 풋볼 선수로 이름 난 제이크는 코치의 명령을 무시한 채 시합 도중 무리한 플레이를 해 하루 아침에 2진으로 강등이 된다. 게다가 치어리더로 활동중인 여자친구 프리실라를 비디오맨에게 빼앗기기 까지 한다. 이에 제이크는 자신의 학교에서 가장 못생긴 여학생을 교내 퀸카로 만들겠다는 결심을 하게 되고 결국 학내에서 범생으로 통하는 제이니를 목표로 선정을 하게 되는데...",
-            "poster_path": "/i9tONllMLSLpUbfIFWdYmWu9Fx2.jpg",
-            "backdrop_path": "/kafWDIh47nKEYdfxatheJwUJQMc.jpg",
-            "genre_ids": [
-                35
             ]
         }
     },
@@ -34458,24 +33939,6 @@
         }
     },
     {
-        "pk": 318256,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 318256,
-            "title": "핫 걸 원티드",
-            "release_date": "2015-05-29",
-            "popularity": 27.533,
-            "vote_average": 6,
-            "vote_count": 536,
-            "overview": "부모 곁을 떠나 자유를 찾으려는 소녀들. 생활비와 학비를 벌고 싶은 소녀들. 유명해지고 팬들을 거느리고 싶은 소녀들... 아마추어 포르노 업계에는 하루에도 수십, 아니 수백 명의 어린 지원자가 쏟아진다. 4백 만 클릭을 이끌어내는 비디오의 주인공이 되어 성취감과 유명세를 느끼지만, 정작 그녀들은 폭력적이고 강제적인 섹스의 소모품으로 착취되고 있을 뿐이다. 황폐해가는 몸과 마음을 돌 볼 시간도 없이, 매일매일 쏟아지는 뉴페이스들에게 떠밀려 포르노 업계의 더욱 깊숙한 나락으로 떨어지고 있는 소녀들. 그들을 삶을 밀착 조명한다.",
-            "poster_path": "/75ot83QOkc02vujyzmIbumQCU6Y.jpg",
-            "backdrop_path": "/bV7eAcBrYb57PwjpQ2ODT6VyFPd.jpg",
-            "genre_ids": [
-                99
-            ]
-        }
-    },
-    {
         "pk": 206487,
         "model": "movies.movie",
         "fields": {
@@ -35271,25 +34734,6 @@
             "genre_ids": [
                 16,
                 10751
-            ]
-        }
-    },
-    {
-        "pk": 481836,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 481836,
-            "title": "두 엄마",
-            "release_date": "2017-08-01",
-            "popularity": 17.881,
-            "vote_average": 5,
-            "vote_count": 3,
-            "overview": "절친한 두 친구, 서로의 엄마를 탐하다!\r 동정이란 이유로 짝사랑하는 여자와 어긋나 상심해 있던 준형에게 친 형제 같은 친구 대진의 엄마 서영이 다가온다.  남자로 거듭날 수 있도록 섹스를 가르쳐주겠다는 서영의 파격적인 제안을 준형은 차마 거절하지 못한다.  한편, 준형과 달리 여자들에게 인기가 많은 대진. 그러나 그는 오래 전부터 준형의 엄마인 연희를 짝사랑해온 상태.  부모님이 이혼할 것 같다는 준형의 말을 들은 대진은 이제 연희에게 적극적인 애정 공세를 펼치기 시작한다.",
-            "poster_path": "/s2VFIakPlAp7uzAgbRik9WMquuF.jpg",
-            "backdrop_path": "/qcHRHwbnTN4cPLNBQSkaMzMTe3J.jpg",
-            "genre_ids": [
-                18,
-                10749
             ]
         }
     },
@@ -36362,24 +35806,6 @@
                 12,
                 36,
                 10752
-            ]
-        }
-    },
-    {
-        "pk": 711642,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 711642,
-            "title": "가슴 큰 뒷집소녀",
-            "release_date": "2020-05-27",
-            "popularity": 29.442,
-            "vote_average": 1,
-            "vote_count": 1,
-            "overview": "동네 친구인 득찬과 철수 두 남자의 진한 우정 사이에 뒷집에 사는 미영이라는 여자가 들어온다.  미영은 평상시에는 너무나 무뚝뚝하고 차가운 성격이지만 침대에서만큼은 그 어떤 여자보다도 정열적이다. 그런 그녀에게 사랑으로 다가서는 득찬과 여전히 섹스 파트너로 남기를 바라는 철수  한편 미영을 사랑하게 된 득찬에게는 오래된 섹스 파트너 희진이 있었는데 득찬의 친구 철수는 희진에게 관심을 보이고.... 누구에게도 사랑을 줄 여력이 없는 희진은 그런 철수를 안타까워하기만 한다.  아찔하고 달콤한 두 청춘 남녀의 러브스토리가 이제 막 시작된다.",
-            "poster_path": "/iGznHu9bvmRprjn1JsEqh6Z5Eou.jpg",
-            "backdrop_path": "/x9eq1xRHRlvUpa8TyjkpNsXU1N2.jpg",
-            "genre_ids": [
-                10749
             ]
         }
     },
@@ -37831,24 +37257,6 @@
         }
     },
     {
-        "pk": 412092,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 412092,
-            "title": "엄마친구 2",
-            "release_date": "2016-09-01",
-            "popularity": 27.238,
-            "vote_average": 4.3,
-            "vote_count": 6,
-            "overview": "“어서 와~ 우리집은 처음이지?”  미대 입시학원에 다니는 재수생 광호는 그나마 위안이 되어준 여자친구 미란에게 마마보이에 조루라는 이유로 차이고 만다. 미란을 피해 다른 학원으로 가려는 광호에게 엄마는 미술을 하는 엄마친구 수연을 소개해주고, 광호는 아직 미혼인데다 세련되고 지적인 외모의 수연에게 한눈에 반한다.  때마침 해외출장 중인 아빠가 병이 나서 광호의 엄마가 호주로 가게 되고, 광호는 며칠간 수연의 집에 머무르게 된다. 수연의 집에 온 광호는 수연을 보며 온갖 상상을 하고, 개방적인 성격의 수연의 조카 하경의 도발로 광호의 두근거리는 생활이 시작된다.  어느 날, 광호는 수연의 핸드폰 배경화면에 있는 남자가 자신의 아빠란 사실을 알게 되고, 수연의 작업실에서 하경과 섹스를 하던 중 자신의 아빠를 그린 그림을 보게 된다. 수연에게 아빠와의 관계를 따져 묻는 광호. 당황한 수연은 실은 자신이 혼자 짝사랑 한 거라며 감추고 있던 비밀을 말한다. 엄마에게 이 사실을 알려줘야 한다며 짐을 싸는 광호에게 수연은 어떤 부탁이든 들어줄 테니 비밀을 지켜달라는 간청을 한다. 수연의 간청에 망설이던 광호는 수연에게 섹스에 자신감이 없는 자신을 진짜 남자로 만들어 달라고 제안하는데…",
-            "poster_path": "/mLlke4cd9R65FYqtMVUZ3h3Z2z9.jpg",
-            "backdrop_path": "/dhaHfxS7AVNG53xdHOfJO5hRQbW.jpg",
-            "genre_ids": [
-                10749
-            ]
-        }
-    },
-    {
         "pk": 853,
         "model": "movies.movie",
         "fields": {
@@ -38579,25 +37987,6 @@
                 16,
                 878,
                 28
-            ]
-        }
-    },
-    {
-        "pk": 576004,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 576004,
-            "title": "포르노",
-            "release_date": "2019-06-28",
-            "popularity": 26.474,
-            "vote_average": 6.2,
-            "vote_count": 283,
-            "overview": "",
-            "poster_path": "/1X6BxBlHqA8VdFrLwmeSiNSEpEB.jpg",
-            "backdrop_path": "/1zgugDjeC24ip242hEETR9CaUar.jpg",
-            "genre_ids": [
-                35,
-                27
             ]
         }
     },

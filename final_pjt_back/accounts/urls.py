@@ -22,5 +22,6 @@ urlpatterns = [
     path('<str:username>/follow/', views.profile_follow, name="profile_follow"),
     path('check/<str:username>/', views.profile_view, name='profile'),
     path('<str:username>/', views.profile_follow, name='getprofile'),
+    path('allusers/check/', views.all_users, name='all_users'),
 
 ]

@@ -70,9 +70,13 @@ export default new Vuex.Store({
     },
     // signup & login -> 완료하면 토큰 발급
     SAVE_TOKEN(state, token) {
-      state.token = token
+      state.token = token;
 
-      router.push('/'); // store/index.js $router 접근 불가 -> import를 해야함
+      if (token) {
+        router.push('/');
+      } else {
+        router.push('/logout'); // 로그아웃 시 이동할 페이지 설정 (예: '/logout')
+      }
     },
     SAVE_USER_INFO(state, info) {
       state.userinfo = info;

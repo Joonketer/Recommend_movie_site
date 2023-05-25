@@ -1,29 +1,33 @@
 <template>
   <div>
-    <h2>검색 결과</h2>
-    <div v-if="filteredSearchResults">
-      <div v-for="movie in filteredSearchResults" :key="movie.id">
-        {{ movie.title }}
-        {{ movie.id }}
-        <div v-if="movie_detail">
-          <img
-            :src="getBackdropUrl(movie.poster_path || movie.backdrop_path)"
-            alt="Backdrop Image"
-            @click="checkMovieExistence(movie)"
-          />
-        </div>
-        <div v-else>
-          <img
-            :src="getBackdropUrl(movie.poster_path || movie.backdrop_path)"
-            alt="Backdrop Image"
-            @click="checkMovieExistence(movie)"
-          />
+    <div class="search-result-title d-flex justify-content-center">
+      <h2>검색 결과</h2>
+    </div>
+    <div v-if="filteredSearchResults" class="result-container">
+      <div
+        v-for="movie in filteredSearchResults"
+        :key="movie.id"
+        class="movie-card"
+        @mouseenter="showDetails(movie)"
+        @mouseleave="hideDetails(movie)"
+      >
+        <img
+          :src="getBackdropUrl(movie.poster_path || movie.backdrop_path)"
+          alt="Backdrop Image"
+          @click="checkMovieExistence(movie)"
+        />
+        <div
+          class="movie-info"
+          v-if="movie.showDetails"
+          @click="checkMovieExistence(movie)"
+        >
+          <h3>{{ movie.title }}</h3>
+          <p>★ : {{ movie.vote_average }}</p>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
@@ -80,6 +84,12 @@ export default {
       // 로그인이 되어 있으면 getArticles action 실행
       // 로그인 X라면 login 페이지로 이동
     },
+    showDetails(movie) {
+      this.$set(movie, "showDetails", true);
+    },
+    hideDetails(movie) {
+      this.$set(movie, "showDetails", false);
+    },
     searchMovies() {
       const url = `https://api.themoviedb.org/3/search/movie?query=${this.searchQuery}&include_adult=false&language=ko-KOR&page=1`;
 
@@ -116,6 +126,7 @@ export default {
           const movieData = response.data;
           if (!movieData.exists) {
             // 선택한 영화가 존재하지 않을 경우에 대한 처리
+
             console.log("영화가 존재하지 않습니다.");
             this.addMovieToDatabase(movieId);
           } else {
@@ -141,7 +152,6 @@ export default {
         return;
       }
 
-      console.log("모든데이터", this.searchResults);
       const movieData = {
         movie_id: movie_detail.id,
         overview: movie_detail.overview,
@@ -155,8 +165,7 @@ export default {
         genre_ids: movie_detail.genres,
         // 필요한 다른 영화 정보도 추가할 수 있습니다.
       };
-      console.log("확인", movie_detail);
-      console.log("내부", movieData);
+
       axios
         .post(API_URL, movieData)
         .then(() => {
@@ -164,6 +173,7 @@ export default {
           this.navigateToDetail(movie_id);
         })
         .catch((error) => {
+          alert("영화 데이터가 아닙니다");
           console.error("영화 추가 중 오류가 발생했습니다:", error);
         });
     },
@@ -175,7 +185,7 @@ export default {
         .get(API_URL)
         .then((response) => {
           const movieData = response.data;
-          console.log("최종", movieData);
+
           this.$router.push({
             name: "DetailView",
             params: movieData,
@@ -190,11 +200,45 @@ export default {
 </script>
 
 <style scoped>
-ul {
+/* ul {
   margin-left: 1rem;
 }
 img {
   width: 100px;
   height: 100px;
+} */
+.result-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.movie-card {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  margin: 10px;
+  overflow: hidden;
+}
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+}
+.movie-card:hover img {
+  opacity: 0.3;
+}
+.movie-info {
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+.movie-card:hover .movie-info {
+  opacity: 1;
 }
 </style>

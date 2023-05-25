@@ -1,24 +1,32 @@
-<!-- views/CreateView.vue -->
-
 <template>
-  <div>
-    <h1>게시글 작성</h1>
-    <form @submit.prevent="createArticle">
-      <label for="category">카테고리 : </label>
-      <select id="type" v-model="type">
-        <option value="talk">Talk</option>
-        <option value="review">Review</option></select
-      ><br />
+  <b-container fluid class="d-flex align-items-center justify-content-center vh-100 bg-dark text-white">
+    <b-card  border-variant=light class="text-white bg-dark " style="width: 50rem; ">
+      <h1 class="text-center">게시글 작성</h1>
+      <b-card-body>
+        <form @submit.prevent="createArticle">
+          <b-form-group label="카테고리 : " label-for="type" label-class="text-white">
+            <b-form-select id="type" v-model="type">
+              <option value="talk">Talk</option>
+              <option value="review">Review</option>
+            </b-form-select>
+          </b-form-group>
 
-      <label for="title">제목 : </label>
-      <input type="text" id="title" v-model.trim="title" /><br />
-      <label for="content">내용 : </label>
-      <textarea id="content" cols="30" rows="10" v-model="content"></textarea
-      ><br />
+          <b-form-group label="제목 : " label-for="title" label-class="text-white">
+            <b-form-input id="title" v-model.trim="title"></b-form-input>
+          </b-form-group>
 
-      <input type="submit" id="submit" />
-    </form>
-  </div>
+          <b-form-group label="내용 : " label-for="content" label-class="text-white">
+            <b-form-textarea id="content" cols="30" rows="10" v-model="content"></b-form-textarea>
+          </b-form-group>
+
+          <div class="d-flex justify-content-center">
+            <b-button type="submit" variant="light">Submit</b-button>
+          </div>
+          <router-link to="/community">Back to Community</router-link><br />
+        </form>
+      </b-card-body>
+    </b-card>
+  </b-container>
 </template>
 
 <script>
@@ -88,6 +96,14 @@ export default {
   },
 };
 </script>
+<style scoped>
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-<style>
+.create-article-form {
+  width: 80%;
+}
 </style>

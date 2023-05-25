@@ -1,25 +1,44 @@
 <template>
   <div class="article-list">
+    <div class="text-center">
     <h3>10번 클릭한 것들 중 가장 많은 장르</h3>
+    </div>  
     <div v-if="isLoading">Loading...</div>
     <div v-else>
-      <div v-for="genre in sortedGenres" :key="genre.id">
-        <h2>{{ getGenreName(genre.id) }}</h2>
-        <p v-for="movie in recommendedMovies[genre.id]" :key="movie.movie_id">
-          {{ movie.title }}
-          <router-link
-            :to="{
-              name: 'DetailView',
-              params: { id: movie.movie_id },
-            }"
-          >
-            <img
-              :src="getBackdropUrl(movie.poster_path || movie.backdrop_path)"
-              alt="Backdrop Image"
-              @click="handleMovieClick(movie)"
-            />
-          </router-link>
-        </p>
+      <div v-if="sortedGenres.length === 0">정보없음</div>
+      <div v-else>
+        <div v-for="genre in sortedGenres" :key="genre.id">
+          <div class="text-center">
+          <h2>{{ getGenreName(genre.id) }}</h2>
+          </div>
+          <b-row>
+            <b-col md="4" v-for="movie in recommendedMovies[genre.id]" :key="movie.movie_id">
+              <b-card
+                class="movie-card bg-dark"
+                @mouseenter="hovering = true"
+                @mouseleave="hovering = false"
+              >
+                <router-link
+                  :to="{
+                    name: 'DetailView',
+                    params: { id: movie.movie_id },
+                  }"
+                >
+                  <div class="movie-poster" @click="handleMovieClick(movie)">
+                    <b-card-img
+                      :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+                      alt="Movie poster"
+                    ></b-card-img>
+                    <b-card-title v-show="hovering" class="movie-title">
+                      {{ movie.title }} <br />
+                      ★ : {{ movie.vote_average }}
+                    </b-card-title>
+                  </div>
+                </router-link>
+              </b-card>
+            </b-col>
+          </b-row>
+        </div>
       </div>
     </div>
   </div>
@@ -27,16 +46,19 @@
 
 <script>
 import axios from "axios";
-
+import { mapState } from "vuex";
 export default {
   name: "ArticleList",
   data() {
     return {
+      nothing: false,
       recommendedMovies: {},
       isLoading: true,
+      hovering: false,
     };
   },
   computed: {
+    ...mapState(["token"]),
     sortedGenres() {
       // Count the occurrence of each genre ID
       const genreCountMap = {};
@@ -90,7 +112,10 @@ export default {
         })
         .catch((error) => {
           // 에러 처리 로직
+
           console.error(error);
+
+          this.nothing = true;
         });
     },
     fetchRecommendedMovies() {
@@ -162,12 +187,79 @@ export default {
 <style scoped>
 .article-list {
   text-align: start;
+  flex-direction: column;
 }
 ul {
   margin-left: 1rem;
 }
-img {
-  width: 100px;
-  height: 100px;
+.movie-poster {
+  position: relative;
+}
+.movie-card {
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 30%;
+  border-radius: 5px;
+  padding: 2%;
+  margin-bottom: 2rem;
+}
+.movie-title {
+  position: absolute;
+  bottom: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease-in-out;
+}
+.movie-card:hover img {
+  opacity: 0.5;
+}
+.movie-card .movie-poster {
+  position: relative;
+}
+.movie-card:hover:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7); /* 50% transparent black */
+  border-radius: 5px;
+}
+.movie-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.movie-card:hover .movie-title {
+  opacity: 1;
+}
+.movie-card h2 {
+  text-align: center;
+
+  transform: translate(-50%, -50%);
+  color: black;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.movie-card:hover h2 {
+  opacity: 1;
+}
+.movie-card h5 {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  color: white;
 }
 </style>

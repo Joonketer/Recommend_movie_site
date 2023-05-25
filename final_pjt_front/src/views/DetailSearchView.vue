@@ -155,8 +155,6 @@ export default {
         headers: { Authorization: `Token ${this.token}` },
       })
         .then((res) => {
-          console.log("로그인");
-          console.log(res);
           this.currentUser = res.data.username; // 사용자 이름을 데이터에 저장
           this.user_id = res.data.pk;
 
@@ -169,9 +167,6 @@ export default {
     },
     submitReview() {
       if (this.reviewContent) {
-        console.log("아이디", this.user_id);
-        console.log("무비아이디", this.article?.movie_id);
-
         const formData = new FormData();
         formData.append("movie", this.article.id);
         formData.append("content", this.reviewContent);

@@ -101,8 +101,6 @@ export default {
         .then((response) => {
           this.movie_detail = response.data;
 
-          console.log("영화 디테일");
-          console.log(this.movie_detail);
           // 영화가 데이터베이스에 존재하는지 확인합니다.
           this.checkIfMovieExists(movie_id)
             .then((exists) => {
@@ -128,7 +126,6 @@ export default {
         });
     },
     fetchSearch() {
-      console.log(this.Movies_title);
       const API_URL = `https://api.themoviedb.org/3/search/movie?query=${this.Movies_title}&include_adult=false&language=ko-KOR&page=1`;
 
       const headers = {
@@ -142,8 +139,6 @@ export default {
         .then((response) => {
           const movie_datas = response.data;
           this.movie_list = movie_datas.results.slice(0, 10);
-          console.log("영화목록");
-          console.log(this.movie_list);
         })
         .catch((error) => {
           console.error("Error fetching movie:", error);
@@ -156,8 +151,7 @@ export default {
         .get(API_URL, { headers: { Authorization: `Token ${this.token}` } })
         .then((response) => {
           const photos = response.data;
-          console.log("포토", photos);
-          console.log("포토", photos.length);
+
           if (photos.length > 0) {
             this.lastClickedPhoto = photos[0];
             console.log(photos[0]);
@@ -184,7 +178,7 @@ export default {
         .get(API_URL)
         .then((response) => {
           const movies = response.data.title;
-          console.log("여기입니다", movies);
+
           this.Movies_title = movies;
 
           // Movies_title이 업데이트된 후에 fetchSearch()를 호출하여 API를 요청합니다.
@@ -206,8 +200,6 @@ export default {
         .get(API_URL)
         .then((response) => {
           const movieData = response.data;
-          console.log("영화 데이터:", movieData);
-          console.log(movieData !== null);
           return movieData.exists; // 영화가 존재하는 경우 true를 반환하고, 그렇지 않은 경우 false를 반환합니다.
         })
         .catch((error) => {
@@ -231,8 +223,7 @@ export default {
         genre_ids: this.movie_detail.genres,
         // 필요한 다른 영화 정보도 추가할 수 있습니다.
       };
-      console.log("확인", this.movie_detail);
-      console.log("내부", movieData);
+
       axios
         .post(API_URL, movieData)
         .then(() => {
@@ -251,7 +242,7 @@ export default {
         .get(API_URL)
         .then((response) => {
           const movieData = response.data;
-          console.log("최종", movieData);
+
           this.$router.push({
             name: "DetailView",
             params: movieData,

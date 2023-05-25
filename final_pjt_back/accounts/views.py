@@ -67,3 +67,10 @@ def profile_view(request, username):
         'isAvailable': is_available,
     }
     return JsonResponse(data)
+
+
+@api_view(['GET'])
+def all_users(request):
+    users = User.objects.all()
+    serializer = ProfileSerializer(users, many=True)
+    return Response(serializer.data)

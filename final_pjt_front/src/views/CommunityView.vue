@@ -1,16 +1,19 @@
 <template>
-  <div>
+  <div class="community-board-container d-flex">
+    <div class="community-board-title d-flex justify-content-center">
     <h1>Community Board</h1>
-    <hr />
+    </div>
+    <hr/>
+    <div class="table d-flex justify-content-center color-light">
     <table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>작성자</th>
-          <th>Title</th>
-          <th>Board Type</th>
-          <th>Created At</th>
-          <th>Updated At</th>
+          <th>ID</th> 
+          <th>작성자</th> 
+          <th>Title</th> 
+          <th>Board Type</th> 
+          <th>Created At</th> 
+          <th>Updated At</th> 
         </tr>
       </thead>
       <tbody>
@@ -43,7 +46,10 @@
         </tr>
       </tbody>
     </table>
+    </div>
+    <div class="create-article-thing d-flex justify-content-end">
     <router-link :to="{ name: 'CreateView' }">[게시글 작성]</router-link>
+  </div>
   </div>
 </template>
 <script>
@@ -92,5 +98,26 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.community-board-container {
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 80%;
+  margin: auto;
+  background-color: #333; /* replace this with the color you want */
+  border: 2px solid #ddd; /* replace this with the color you want */
+  border-radius: 5px;
+  color: #f5f5f5; /* a color close to white */
+}
+.community-board-container tr, 
+.community-board-container th, 
+.community-board-container td {
+  color: #f5f5f5; /* a color close to white */
+}
+a{
+  color: #f5f5f5; /* a color close to white */
+}
 </style>

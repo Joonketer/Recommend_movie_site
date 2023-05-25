@@ -1,70 +1,81 @@
 <template>
-  <div v-if="board">
-    <!-- <h2>지금 로그인된 사람{{ this.currentUser.username }}</h2> -->
-    <h1>{{ board.title }}</h1>
-    <p>{{ board.content }}</p>
-    <p>작성자: {{ board.user.username }}</p>
-    <p>작성일: {{ new Date(board.created_at).toLocaleDateString() }}</p>
-    <p>수정일: {{ new Date(board.updated_at).toLocaleDateString() }}</p>
-    <p>게시글 유형: {{ board.board_type === 0 ? "Talk" : "comment" }}</p>
-    <router-link to="/community">Back to Community</router-link><br />
-    <router-link
-      v-if="isCurrentUser(board.user.username)"
-      :to="{ name: 'CommunityArticleUpdateView' }"
-      >수정</router-link
-    >
-    <button
-      v-if="isCurrentUser(board.user.username)"
-      @click="deleteBoard(board.id)"
-    >
-      삭제
-    </button>
+  <b-container fluid class="d-flex align-items-center justify-content-center vh-100 bg-#333 text-white">
+    <b-card border-variant="light" class="text-white bg-dark" style="width: 30rem;">
+      <b-card-body>
+        <div v-if="board">
+          <b-card-title>{{ board.title }}</b-card-title>
+          <b-card-text>{{ board.content }}</b-card-text>
+          <p>작성자: {{ board.user.username }}</p>
+          <p>작성일: {{ new Date(board.created_at).toLocaleDateString() }}</p>
+          <p>수정일: {{ new Date(board.updated_at).toLocaleDateString() }}</p>
+          <p>게시글 유형: {{ board.board_type === 0 ? "Talk" : "comment" }}</p>
 
-    <button
-      v-if="!isCurrentUser(board.user.username)"
-      @click="likeBoard(board.id)"
-    >
-      좋아요
-      {{
-        (Array.isArray(board?.like_users) && board?.like_users.length) || 0
-      }}개
-    </button>
-    <hr />
-    <!-- 리뷰 작성 폼 -->
-    <form @submit.prevent="submitcomment">
-      <textarea
-        v-model="commentContent"
-        placeholder="댓글을 작성하세요"
-      ></textarea>
-      <p>작성자: {{ currentUser }}</p>
-      <button type="submit">리뷰 작성</button>
-    </form>
-    <hr />
-    <!-- 작성된 댓글 목록 -->
-    <div v-if="board.comments && board.comments.length > 0">
-      <h2>댓글 목록</h2>
-      <ul>
-        <li v-for="comment in board.comments" :key="comment.id">
-          {{ comment.content }} - 작성자:
-          {{ comment.user }}
-          <button
-            v-if="!isCurrentUser(comment.user.username)"
-            @click="likecomment(comment.id)"
+          
+        
+          <b-button 
+              v-if="isCurrentUser(board.user.username)" 
+              variant="warning" 
+              :to="{ name: 'CommunityArticleUpdateView' }"
+          >
+              수정
+          </b-button>
+
+          <b-button
+            v-if="isCurrentUser(board.user.username)"
+            @click="deleteBoard(board.id)"
+            variant="danger"
+          >
+            삭제
+          </b-button>
+          <b-button
+            v-if="!isCurrentUser(board.user.username)"
+            @click="likeBoard(board.id)"
           >
             좋아요
             {{
-              (Array.isArray(comment?.like_users) &&
-                comment?.like_users.length) ||
-              0
+              (Array.isArray(board?.like_users) && board?.like_users.length) || 0
             }}개
-          </button>
-        </li>
-      </ul>
-    </div>
-    <div v-else>
-      <p>리뷰가 없습니다.</p>
-    </div>
-  </div>
+          </b-button>
+          <hr />
+          <!-- 리뷰 작성 폼 -->
+          <b-form @submit.prevent="submitcomment">
+            <b-form-textarea
+              v-model="commentContent"
+              placeholder="댓글을 작성하세요"
+            ></b-form-textarea>
+            <p>작성자: {{ currentUser.username }}</p>
+            <b-button type="submit">리뷰 작성</b-button>
+          </b-form>
+          <hr />
+          <!-- 작성된 댓글 목록 -->
+          <div v-if="board.comments && board.comments.length > 0">
+            <h2>댓글 목록</h2>
+            <ul>
+              <li v-for="comment in board.comments" :key="comment.id">
+                {{ comment.content }} - 작성자:
+                {{ comment.user.username }}
+                <b-button
+                  v-if="!isCurrentUser(comment.user.username)"
+                  @click="likecomment(comment.id)"
+                >
+                  좋아요
+                  {{
+                    (Array.isArray(comment?.like_users) &&
+                      comment?.like_users.length) ||
+                    0
+                  }}개
+                </b-button>
+              </li>
+            </ul>
+          </div>
+          <div v-else>
+            <p>리뷰가 없습니다.</p>
+          </div>
+          <router-link to="/community">Back to Community</router-link><br />
+        </div>
+      </b-card-body>
+    </b-card>
+  </b-container>
 </template>
 
 <script>
@@ -124,8 +135,6 @@ export default {
         headers: { Authorization: `Token ${this.token}` },
       })
         .then((res) => {
-          console.log("로그인");
-          console.log(res);
           this.currentUser = res.data; // 사용자 정보 전체를 저장
           this.user_id = res.data.pk;
 
@@ -170,7 +179,6 @@ export default {
           }
         )
         .then(() => {
-          console.log("좋아요 성공");
           this.getBoardDetail();
         })
         .catch((err) => {

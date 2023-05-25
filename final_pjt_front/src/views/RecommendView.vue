@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>추천페이지입니다</h1>
+    <h1>영화 추천 페이지</h1>
     <RecommendList />
     <hr>
     <ClickedList />
